@@ -38,11 +38,11 @@ const social: Social = [
 
 const home: Home = {
   path: "/",
-  image: `/api/og/generate?title=${encodeURIComponent(`${person.name} - Product Manager Portfolio`)}`,
+  image: `/api/og/generate?title=${encodeURIComponent(`Lucas Hale - Product Manager Portfolio`)}`,
   label: "Home",
-  title: `${person.name} - Product Manager Portfolio`,
-  description: `AI and data-first Product Manager portfolio: strategy, discovery, UX, and measurable outcomes.`,
-  headline: <>AI and data-first product leadership</>,
+  title: `Lucas Hale - Product Manager Portfolio`,
+  description: `AI and data-led Product Manager portfolio: strategy, discovery, UX, and measurable outcomes.`,
+  headline: <>AI and data-led product management</>,
   featured: {
     display: true,
     title: (
@@ -58,7 +58,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I’m {person.name}, a Product Manager & co-founder at <Text as="span" size="xl" weight="strong">Meritt</Text>.
+      I’m Lucas, a Product Manager & co-founder at <Text as="span" size="xl" weight="strong">meritt.</Text>.
       <br />
       I combine AI + data depth with user research, experimentation, and UI/UX craft to ship products that move metrics.
 </>
