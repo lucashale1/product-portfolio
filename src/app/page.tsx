@@ -1,11 +1,10 @@
 import {
-  Heading,
-  Text,
   Column,
   Row,
   Schema,
   Meta,
 } from "@once-ui-system/core";
+import { PageShell, PageHeroTitle, PageHeroLead, SectionTitle } from "@/components";
 import { home, person, about, baseURL } from "@/resources";
 import { Projects } from "@/components/work/Projects";
 
@@ -21,7 +20,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
+    <PageShell>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -43,32 +42,21 @@ export default function Home() {
           align="center"
           s={{ direction: "column" }}
         >
-          <Column maxWidth="s" horizontal="center" align="center" gap="m">
-            <Heading wrap="balance" variant="display-strong-l" paddingBottom="8">
-              {home.headline}
-            </Heading>
+          <Column maxWidth="m" horizontal="center" align="center" gap="m" paddingX="24">
+            <PageHeroTitle>{home.headline}</PageHeroTitle>
 
-            <Text
-              wrap="balance"
-              onBackground="neutral-weak"
-              variant="heading-default-xl"
-              align="center"
-            >
-              {home.subline}
-            </Text>
+            <PageHeroLead align="center">{home.subline}</PageHeroLead>
           </Column>
         </Row>
       </Column>
 
       <Column fillWidth gap="l" marginTop="40">
         <Row fillWidth horizontal="center">
-          <Heading as="h2" variant="display-strong-xs" wrap="balance">
-            Featured case studies
-          </Heading>
+          <SectionTitle>Featured case studies</SectionTitle>
         </Row>
 
         <Projects range={[1, 4]} />
       </Column>
-    </Column>
+    </PageShell>
   );
 }

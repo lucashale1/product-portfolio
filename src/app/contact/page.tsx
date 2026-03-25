@@ -1,4 +1,5 @@
-import { Avatar, Button, Column, Heading, Meta, Row, Schema, Text } from "@once-ui-system/core";
+import { Avatar, Button, Column, Meta, Row, Schema, Text } from "@once-ui-system/core";
+import { PageShell, PageHeroTitle, PageHeroLead } from "@/components";
 import { about, baseURL, contact, person, social } from "@/resources";
 
 export async function generateMetadata() {
@@ -16,7 +17,7 @@ export default function Contact() {
   const linkedIn = social.find((item) => item.name === "LinkedIn")?.link ?? "https://www.linkedin.com/in/lucas-hale/";
 
   return (
-    <Column maxWidth="m" paddingTop="24" paddingBottom="64" horizontal="center" gap="24">
+    <PageShell horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -33,12 +34,8 @@ export default function Contact() {
 
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <Avatar src={person.avatar} size="xl" />
-        <Heading variant="display-strong-xl" wrap="balance">
-          Contact Lucas
-        </Heading>
-        <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
-          {contact.description}
-        </Text>
+        <PageHeroTitle>Contact Lucas</PageHeroTitle>
+        <PageHeroLead align="center">{contact.description}</PageHeroLead>
       </Column>
 
       <Row fillWidth horizontal="center" gap="12" s={{ direction: "column" }}>
@@ -53,7 +50,6 @@ export default function Contact() {
       <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
         If you’re hiring for Product Management roles, I’m especially interested in teams that value data, experimentation, and practical UX.
       </Text>
-    </Column>
+    </PageShell>
   );
 }
-

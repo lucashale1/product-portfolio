@@ -6,8 +6,6 @@ import {
   AvatarGroup,
   Button,
   Column,
-  Flex,
-  Heading,
   Media,
   Text,
   SmartLink,
@@ -17,7 +15,7 @@ import {
 } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
-import { ScrollToHash, CustomMDX } from "@/components";
+import { ScrollToHash, CustomMDX, PageShell, PageHeroTitle, SectionTitle } from "@/components";
 import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
 
@@ -74,7 +72,7 @@ export default async function Project({
     })) || [];
 
   return (
-    <Column as="section" maxWidth="m" horizontal="center" gap="l">
+    <PageShell as="section">
       <Schema
         as="blogPosting"
         baseURL={baseURL}
@@ -99,7 +97,7 @@ export default async function Project({
         <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
           {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
         </Text>
-        <Heading variant="display-strong-m">{post.metadata.title}</Heading>
+        <PageHeroTitle>{post.metadata.title}</PageHeroTitle>
       </Column>
       <Row marginBottom="32" horizontal="center">
         <Row gap="16" vertical="center">
@@ -126,12 +124,10 @@ export default async function Project({
       </Column>
       <Column fillWidth gap="40" horizontal="center" marginTop="40">
         <Line maxWidth="40" />
-        <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
-          Related projects
-        </Heading>
+        <SectionTitle marginBottom="24">Related projects</SectionTitle>
         <Projects exclude={[post.slug]} range={[2]} />
       </Column>
       <ScrollToHash />
-    </Column>
+    </PageShell>
   );
 }
