@@ -8,8 +8,9 @@ const person: Person = {
   role: "Product Manager & Co-founder at Meritt",
   avatar: "/images/avatar.svg",
   email: "lucas.hale10@gmail.com",
-  // IANA time zone identifier used for the optional time widget in the header.
-  location: "Europe/London",
+  location: "Somerset, UK",
+  timeZone: "Europe/London",
+  languages: ["English"],
 };
 
 const newsletter: Newsletter = {
@@ -58,7 +59,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I’m Lucas, a Product Manager & co-founder at <Text as="span" size="xl" weight="strong">meritt.</Text>.
+      I’m Lucas, a Product Manager & co-founder at <strong>meritt</strong>.
       <br />
       I combine AI + data depth with user research, experimentation, and UI/UX craft to ship products that move metrics.
 </>

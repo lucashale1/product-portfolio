@@ -1,4 +1,5 @@
-import { Column, Heading, Meta, Schema, Text } from "@once-ui-system/core";
+import { Column, Meta, Schema, Text } from "@once-ui-system/core";
+import { PageShell, PageHeroTitle, PageHeroLead } from "@/components";
 import { baseURL, about, person, work } from "@/resources";
 import { Projects } from "@/components/work/Projects";
 
@@ -14,7 +15,7 @@ export async function generateMetadata() {
 
 export default function Work() {
   return (
-    <Column maxWidth="m" paddingTop="24">
+    <PageShell>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -28,13 +29,13 @@ export default function Work() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Heading marginBottom="8" variant="heading-strong-xl" align="center">
-        Case Studies
-      </Heading>
-      <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance" marginBottom="24" align="center">
-        Strategy through delivery: AI + data-first decisions, rigorous discovery, and measurable outcomes across the full product lifecycle.
-      </Text>
+      <Column fillWidth horizontal="center" gap="8">
+        <PageHeroTitle align="center">Case Studies</PageHeroTitle>
+        <PageHeroLead align="center">
+          Strategy through delivery: AI + data-first decisions, rigorous discovery, and measurable outcomes across the full product lifecycle.
+        </PageHeroLead>
+      </Column>
       <Projects />
-    </Column>
+    </PageShell>
   );
 }

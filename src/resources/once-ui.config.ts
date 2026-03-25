@@ -26,7 +26,7 @@ const routes: RoutesConfig = {
 };
 
 const display: DisplayConfig = {
-  location: true,
+  location: false,
   time: false,
 };
 
@@ -36,7 +36,7 @@ const display: DisplayConfig = {
 const protectedRoutes: ProtectedRoutesConfig = {} as ProtectedRoutesConfig;
 
 // Import and set font for each variant
-import { JetBrains_Mono, Outfit, Zilla_Slab } from "next/font/google";
+import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
 
 const heading = Outfit({
   variable: "--font-heading",
@@ -45,11 +45,10 @@ const heading = Outfit({
   weight: ["400", "600", "700"],
 });
 
-const body = Zilla_Slab({
+const body = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 const label = Outfit({
@@ -76,7 +75,7 @@ const fonts: FontsConfig = {
 // default customization applied to the HTML in the main layout.tsx
 const style: StyleConfig = {
   theme: "dark",
-  neutral: "gray", // sand | gray | slate | mint | rose | dusk | custom
+  neutral: "slate", // sand | gray | slate | mint | rose | dusk | custom
   brand: "cyan", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
   accent: "red", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
   solid: "contrast", // color | contrast

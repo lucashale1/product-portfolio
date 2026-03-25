@@ -1,12 +1,17 @@
 import { notFound } from "next/navigation";
-import { CustomMDX, ScrollToHash } from "@/components";
+import {
+  CustomMDX,
+  ScrollToHash,
+  PageShell,
+  PageHeroTitle,
+  PageHeroLead,
+  SectionTitle,
+} from "@/components";
 import {
   Meta,
   Schema,
   Column,
-  Heading,
   HeadingNav,
-  Icon,
   Row,
   Text,
   SmartLink,
@@ -18,7 +23,6 @@ import { baseURL, about, blog, person } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
 import { getPosts } from "@/utils/utils";
 import { Metadata } from "next";
-import React from "react";
 import { Posts } from "@/components/blog/Posts";
 import { ShareSection } from "@/components/blog/ShareSection";
 
@@ -65,16 +69,11 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
     notFound();
   }
 
-  const avatars =
-    post.metadata.team?.map((person) => ({
-      src: person.avatar,
-    })) || [];
-
   return (
     <Row fillWidth>
       <Row maxWidth={12} m={{ hide: true }} />
       <Row fillWidth horizontal="center">
-        <Column as="section" maxWidth="m" horizontal="center" gap="l" paddingTop="24">
+        <PageShell as="section">
           <Schema
             as="blogPosting"
             baseURL={baseURL}
@@ -100,16 +99,11 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
               {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
             </Text>
-            <Heading variant="display-strong-m">{post.metadata.title}</Heading>
+            <PageHeroTitle>{post.metadata.title}</PageHeroTitle>
             {post.metadata.subtitle && (
-              <Text 
-                variant="body-default-l" 
-                onBackground="neutral-weak" 
-                align="center"
-                style={{ fontStyle: 'italic' }}
-              >
+              <PageHeroLead align="center" style={{ fontStyle: "italic" }}>
                 {post.metadata.subtitle}
-              </Text>
+              </PageHeroLead>
             )}
           </Column>
           <Row marginBottom="32" horizontal="center">
@@ -144,13 +138,13 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
 
           <Column fillWidth gap="40" horizontal="center" marginTop="40">
             <Line maxWidth="40" />
-            <Text as="h2" id="recent-posts" variant="heading-strong-xl" marginBottom="24">
+            <SectionTitle id="recent-posts" marginBottom="24">
               Recent posts
-            </Text>
+            </SectionTitle>
             <Posts exclude={[post.slug]} range={[1, 2]} columns="2" thumbnail direction="column" />
           </Column>
           <ScrollToHash />
-        </Column>
+        </PageShell>
       </Row>
       <Column
         maxWidth={12}

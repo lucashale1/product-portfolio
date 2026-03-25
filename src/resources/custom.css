@@ -70,16 +70,33 @@
 
 :root {
   /*
-    Override Once UI typography weight tokens so typography variants render
-    with the specific weights you requested:
-    - Headings: Outfit 700
-    - Body: Zilla Slab 300
+    Headings/display: Outfit at 700. Body uses Once UI defaults (normal / strong).
   */
   --font-weight-heading-default: 700;
   --font-weight-heading-strong: 700;
   --font-weight-display-default: 700;
   --font-weight-display-strong: 700;
+}
 
-  --font-weight-body-default: 300;
-  --font-weight-body-strong: 300;
+/*
+  Once UI Text uses font-body + font-default + font-m, but .font-default applies
+  --font-weight-display-*; map body copy back to theme body weights (normal / bold).
+*/
+.font-body.font-default {
+  font-weight: var(--font-weight-body-default);
+}
+
+.font-body.font-strong {
+  font-weight: var(--font-weight-body-strong);
+}
+
+/*
+  Lighter than default Once UI neutral-weak (700 dark / 500 light).
+*/
+[data-theme="dark"] {
+  --neutral-on-background-weak: var(--function-neutral-900);
+}
+
+[data-theme="light"] {
+  --neutral-on-background-weak: var(--function-neutral-700);
 }

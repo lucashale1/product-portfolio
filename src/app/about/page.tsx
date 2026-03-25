@@ -2,7 +2,6 @@ import {
   Avatar,
   Button,
   Column,
-  Heading,
   Icon,
   IconButton,
   Media,
@@ -12,6 +11,7 @@ import {
   Schema,
   Row,
 } from "@once-ui-system/core";
+import { PageShell, PageHeroTitle, PageHeroLead, SectionTitle } from "@/components";
 import { baseURL, about, person, social } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
@@ -51,7 +51,7 @@ export default function About() {
     },
   ];
   return (
-    <Column maxWidth="m">
+    <PageShell>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -117,41 +117,8 @@ export default function About() {
             vertical="center"
             marginBottom="32"
           >
-            {about.calendar.display && (
-              <Row
-                fitWidth
-                border="brand-alpha-medium"
-                background="brand-alpha-weak"
-                radius="full"
-                padding="4"
-                gap="8"
-                marginBottom="m"
-                vertical="center"
-                className={styles.blockAlign}
-                style={{
-                  backdropFilter: "blur(var(--static-space-1))",
-                }}
-              >
-                <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-                <Row paddingX="8">Schedule a call</Row>
-                <IconButton
-                  href={about.calendar.link}
-                  data-border="rounded"
-                  variant="secondary"
-                  icon="chevronRight"
-                />
-              </Row>
-            )}
-            <Heading className={styles.textAlign} variant="display-strong-xl">
-              {person.name}
-            </Heading>
-            <Text
-              className={styles.textAlign}
-              variant="display-default-xs"
-              onBackground="neutral-weak"
-            >
-              {person.role}
-            </Text>
+            <PageHeroTitle className={styles.textAlign}>{person.name}</PageHeroTitle>
+            <PageHeroLead className={styles.textAlign}>{person.role}</PageHeroLead>
             {social.length > 0 && (
               <Row
                 className={styles.blockAlign}
@@ -204,23 +171,23 @@ export default function About() {
 
           {about.work.display && (
             <>
-              <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
+              <SectionTitle id={about.work.title} marginBottom="m">
                 {about.work.title}
-              </Heading>
+              </SectionTitle>
               <Column fillWidth gap="l" marginBottom="40">
                 {about.work.experiences.map((experience, index) => (
                   <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
                     <Row fillWidth horizontal="between" vertical="end" marginBottom="4">
-                      <Text id={experience.company} variant="heading-strong-l">
-                        {experience.company}
-                      </Text>
-                      <Text variant="heading-default-xs" onBackground="neutral-weak">
+                    <Text variant="heading-strong-l">
+                      {experience.role}
+                    </Text>
+                      <Text variant="body-default-s" onBackground="neutral-weak">
                         {experience.timeframe}
                       </Text>
                     </Row>
-                    <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
-                      {experience.role}
-                    </Text>
+                    <Text id={experience.company} variant="heading-strong-s" onBackground="neutral-weak" marginBottom="m">
+                        {experience.company}
+                      </Text>
                     <Column as="ul" gap="16">
                       {experience.achievements.map(
                         (achievement: React.ReactNode, index: number) => (
@@ -263,16 +230,16 @@ export default function About() {
 
           {about.studies.display && (
             <>
-              <Heading as="h2" id={about.studies.title} variant="display-strong-s" marginBottom="m">
+              <SectionTitle id={about.studies.title} marginBottom="m">
                 {about.studies.title}
-              </Heading>
+              </SectionTitle>
               <Column fillWidth gap="l" marginBottom="40">
                 {about.studies.institutions.map((institution, index) => (
                   <Column key={`${institution.name}-${index}`} fillWidth gap="4">
-                    <Text id={institution.name} variant="heading-strong-l">
+                    <Text id={institution.name} variant="heading-strong-s">
                       {institution.name}
                     </Text>
-                    <Text variant="heading-default-xs" onBackground="neutral-weak">
+                    <Text variant="body-default-m">
                       {institution.description}
                     </Text>
                   </Column>
@@ -283,21 +250,16 @@ export default function About() {
 
           {about.technical.display && (
             <>
-              <Heading
-                as="h2"
-                id={about.technical.title}
-                variant="display-strong-s"
-                marginBottom="40"
-              >
+              <SectionTitle id={about.technical.title} marginBottom="40">
                 {about.technical.title}
-              </Heading>
+              </SectionTitle>
               <Column fillWidth gap="l">
                 {about.technical.skills.map((skill, index) => (
                   <Column key={`${skill}-${index}`} fillWidth gap="4">
-                    <Text id={skill.title} variant="heading-strong-l">
+                    <Text id={skill.title} variant="heading-strong-s">
                       {skill.title}
                     </Text>
-                    <Text variant="body-default-m" onBackground="neutral-weak">
+                    <Text variant="body-default-m">
                       {skill.description}
                     </Text>
                     {skill.tags && skill.tags.length > 0 && (
@@ -337,6 +299,6 @@ export default function About() {
           )}
         </Column>
       </Row>
-    </Column>
+    </PageShell>
   );
 }

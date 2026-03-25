@@ -170,12 +170,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </Heading>
 
         {description?.trim() && (
-          <Text
-            wrap="balance"
-            onBackground="neutral-weak"
-            variant="body-default-s"
-            style={{ fontWeight: "var(--font-weight-light, 300)" }}
-          >
+          <Text wrap="balance" onBackground="neutral-weak" variant="body-default-s">
             {description}
           </Text>
         )}
@@ -198,9 +193,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             onBackground={`${tag.variant}-medium`}
           >
             <Icon name={tag.icon} size="xs" />
-            <Text variant="body-default-s" style={{ fontWeight: "var(--font-weight-light, 300)" }}>
-              {tag.label}
-            </Text>
+            <Text variant="body-default-s">{tag.label}</Text>
           </Row>
         ))}
       </Row>
