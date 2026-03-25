@@ -43,6 +43,7 @@ const heading = Outfit({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "600", "700"],
 });
 
 const body = Zilla_Slab({
@@ -56,12 +57,14 @@ const label = Outfit({
   variable: "--font-label",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "600", "700"],
 });
 
 const code = JetBrains_Mono({
   variable: "--font-code",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "700"],
 });
 
 const fonts: FontsConfig = {
