@@ -37,31 +37,34 @@ const display: DisplayConfig = {
 const protectedRoutes: ProtectedRoutesConfig = {} as ProtectedRoutesConfig;
 
 // Import and set font for each variant
-import { JetBrains_Mono, Outfit, Zilla_Slab  } from "next/font/google";
+import { JetBrains_Mono, Outfit, Zilla_Slab } from "next/font/google";
 
 const heading = Outfit({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "600", "700"],
 });
 
 const body = Zilla_Slab({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300"],
 });
 
 const label = Outfit({
   variable: "--font-label",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "600", "700"],
 });
 
 const code = JetBrains_Mono({
   variable: "--font-code",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "700"],
 });
 
 const fonts: FontsConfig = {

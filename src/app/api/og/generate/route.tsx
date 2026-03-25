@@ -108,8 +108,8 @@ export async function GET(request: Request) {
       height: 720,
       fonts: [
         {
-          name: "Manrope",
-          data: await loadGoogleFont("Manrope:wght@400"),
+          name: "Outfit",
+          data: await loadGoogleFont("Outfit:wght@700"),
           style: "normal",
         },
       ],
