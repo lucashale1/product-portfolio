@@ -67,3 +67,19 @@
   --scheme-neutral-600-50: rgba(137,152,159,0.5);
   /*
 }*/
+
+:root {
+  /*
+    Override Once UI typography weight tokens so typography variants render
+    with the specific weights you requested:
+    - Headings: Outfit 700
+    - Body: Zilla Slab 300
+  */
+  --font-weight-heading-default: 700;
+  --font-weight-heading-strong: 700;
+  --font-weight-display-default: 700;
+  --font-weight-display-strong: 700;
+
+  --font-weight-body-default: 300;
+  --font-weight-body-strong: 300;
+}
