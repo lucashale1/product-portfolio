@@ -20,21 +20,21 @@ const routes: RoutesConfig = {
   "/": true,
   "/about": true,
   "/work": true,
-  "/blog": true,
-  "/gallery": true,
+  "/contact": true,
+  "/blog": false,
+  "/gallery": false,
 };
 
 const display: DisplayConfig = {
   location: true,
-  time: true,
+  time: false,
   themeSwitcher: true,
 };
 
 // Enable password protection on selected routes
 // Set password in the .env file, refer to .env.example
-const protectedRoutes: ProtectedRoutesConfig = {
-  "/work/automate-design-handovers-with-a-figma-to-code-pipeline": true,
-};
+// Leave empty to disable password protection on all routes.
+const protectedRoutes: ProtectedRoutesConfig = {} as ProtectedRoutesConfig;
 
 // Import and set font for each variant
 import { Geist } from "next/font/google";
@@ -118,7 +118,7 @@ const effects: EffectsConfig = {
     colorEnd: "page-background",
   },
   dots: {
-    display: true,
+    display: false,
     opacity: 40,
     size: "2",
     color: "brand-background-strong",

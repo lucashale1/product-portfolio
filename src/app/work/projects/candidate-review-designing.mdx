@@ -1,0 +1,49 @@
+---
+title: "Candidate Review Designing"
+publishedAt: "2026-01-20"
+summary: "Designed a reviewer workflow (and AI-assisted review surfaces) to help teams evaluate candidates faster with consistent decision-making."
+images: []
+team:
+  - name: "Lucas Hale"
+    role: "Product Manager & Co-founder"
+    avatar: "/images/avatar.svg"
+    linkedIn: "https://www.linkedin.com/in/lucas-hale/"
+---
+
+## Problem
+Reviewing candidates is time-consuming and subjective. Teams need to:
+- Compare candidates efficiently across stages.
+- Reduce inconsistency between reviewers.
+- Preserve transparency so decisions feel fair and explainable.
+
+The product’s challenge wasn’t just “building UI”, it was designing a workflow that makes high-quality review the easiest path.
+
+## Approach
+I approached this as a “decision workflow” problem:
+- Research how reviewers actually work under time pressure.
+- Define a lightweight rubric that turns qualitative signals into consistent evaluation.
+- Use AI assistance to surface structured summaries and candidate highlights, without hiding the underlying reasoning.
+
+## Execution
+- Created reviewer journey maps and ran targeted discovery conversations to understand friction points and handoff moments.
+- Designed the review workflow in Figma (review queue, per-candidate summary, evidence-first sections, and decision actions).
+- Validated key screens with rapid prototypes (Cursor/Claude Code-assisted iteration + quick feedback loops) before engineering handoff.
+- Partnered with engineering to wire AI-assisted review surfaces and instrument PostHog event tracking to learn:
+  - review start rate
+  - review completion time
+  - rubric usage vs skip behaviour
+
+## Impact (metrics)
+- Review completion time: **~X% faster (metrics pending)**
+- Reviewer adoption: **~Y% of reviews used the AI-assisted surfaces (metrics pending)**
+- Decision consistency: **improved consistency signals (metrics pending)**
+
+## Learnings
+- Review workflows only stick when AI assistance is clearly controllable and transparent.
+- Instrumentation needs to measure both “usage” and “decision quality”, otherwise teams optimize for the wrong behaviours.
+
+## What I’d do next
+- Finalize success metrics with engineering + stakeholders (time-to-review, rubric adherence, and downstream acceptance/quality).
+- Add calibration loops (periodic reviewer alignment prompts) to keep rubric interpretation consistent.
+- Improve AI evidence citation so reviewers can quickly verify key claims.
+

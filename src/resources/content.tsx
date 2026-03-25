@@ -1,21 +1,21 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import { About, BasePageConfig, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
-  firstName: "Selene",
-  lastName: "Yu",
-  name: `Selene Yu`,
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  firstName: "Lucas",
+  lastName: "Hale",
+  name: "Lucas Hale",
+  role: "Product Manager & Co-founder at Meritt",
+  avatar: "/images/avatar.svg",
+  email: "lucas.hale10@gmail.com",
+  // IANA time zone identifier used for the optional time widget in the header.
+  location: "Europe/London",
 };
 
 const newsletter: Newsletter = {
-  display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  display: false,
+  title: <>Subscribe</>,
+  description: <>Get updates</>,
 };
 
 const social: Social = [
@@ -23,27 +23,9 @@ const social: Social = [
   // Import new icons in /once-ui/icons.ts
   // Set essentials: true for links you want to show on the about page
   {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/once-ui-system",
-    essential: true,
-  },
-  {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
-    essential: true,
-  },
-  {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/once_ui/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    link: "https://www.linkedin.com/in/lucas-hale/",
     essential: true,
   },
   {
@@ -56,27 +38,29 @@ const social: Social = [
 
 const home: Home = {
   path: "/",
-  image: "/images/og/home.jpg",
+  image: `/api/og/generate?title=${encodeURIComponent(`${person.name} - Product Manager Portfolio`)}`,
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  title: `${person.name} - Product Manager Portfolio`,
+  description: `AI and data-first Product Manager portfolio: strategy, discovery, UX, and measurable outcomes.`,
+  headline: <>AI and data-first product leadership</>,
   featured: {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
+        <strong className="ml-4">{person.firstName}</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
-          Featured work
+          Featured case studies
         </Text>
       </Row>
     ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    href: "/work/ai-video-coach",
   },
   subline: (
     <>
-    I'm Selene, a design engineer at <Text as="span" size="xl" weight="strong">ONCE UI</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
+      I’m {person.name}, a Product Manager & co-founder at <Text as="span" size="xl" weight="strong">Meritt</Text>.
+      <br />
+      I combine AI + data depth with user research, experimentation, and UI/UX craft to ship products that move metrics.
 </>
   ),
 };
@@ -85,7 +69,7 @@ const about: About = {
   path: "/about",
   label: "About",
   title: `About – ${person.name}`,
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+  description: `Meet ${person.name}, a data and AI-first Product Manager. Built across sales, marketing, and SaaS delivery.`,
   tableOfContent: {
     display: true,
     subItems: false,
@@ -99,55 +83,76 @@ const about: About = {
   },
   intro: {
     display: true,
-    title: "Introduction",
+    title: "PM Journey",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        I started in sales and marketing, then moved into product with an obsessive focus on discovery, experimentation, and measurable outcomes.
+        My work blends technical depth (APIs, event tracking, embeddings) with UX craft and strong user research.
       </>
     ),
   },
   work: {
-    display: true, // set to false to hide this section
-    title: "Work Experience",
+    display: true,
+    title: "Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Meritt",
+        timeframe: "Mar 2024 - Present",
+        role: "Product Manager & Co-founder",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Led 0-1 product development from concept to 8,000+ monthly active users, defining product vision and roadmap through continuous discovery, backlog prioritisation, and quarterly roadmap buy-in.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Shipped the AI Video Coach feature, improving interview acceptance rates by 20% and achieving 92% positive candidate feedback.
+          </>,
+          <>
+            Reduced candidate journey drop-off via funnel analysis and behavioural session data in PostHog; structured A/B tests improved activation from 30% to 45% across 10,000+ candidates.
+          </>,
+          <>
+            Collaborated with engineering to scope and deliver REST API integrations including an AI video analysis microservice, dual email systems (employer vs candidate login), Upstash serverless queue infrastructure for long jobs, and custom PostHog event tracking from scratch.
+          </>,
+          <>
+            Delivered AI-powered semantic search using vector embeddings (OpenAI) + Pinecone, enabling matching across 3m+ data points with sub-200ms query times while optimizing backend performance and infrastructure costs.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "eola",
+        timeframe: "May 2023 - Jul 2024",
+        role: "Account Executive",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Achieved 120% of sales quota by selling to non-technical small business owners, translating features into simple business value through consultative discovery.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Conducted 20+ discovery calls to identify recurring product gaps; turned feedback into 10 prioritised feature proposals (impact-effort), with 8 adopted into the product roadmap.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Hygraph",
+        timeframe: "Jul 2022 - May 2023",
+        role: "Senior Business Development Representative",
+        achievements: [
+          <>
+            Achieved 160% of quota booking enterprise meetings, learning and selling complex topics (headless CMS, GraphQL APIs, content federation) into leaders at Ticketmaster, FOX, NBC Universal, Arsenal FC, and Amazon.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Jaguar Land Rover",
+        timeframe: "Jun 2017 - Jun 2018",
+        role: "Product Analyst - Range Rover",
+        achievements: [
+          <>
+            Produced data-driven reports and presentations that shaped future product mix and feature decisions for the 20 model year All-New Range Rover Evoque.
+          </>,
+          <>
+            Managed product configuration and specification data across 30+ vehicle variants, coordinating with engineering, marketing, and sales teams to ensure accuracy and 100% regulatory compliance.
           </>,
         ],
         images: [],
@@ -155,78 +160,51 @@ const about: About = {
     ],
   },
   studies: {
-    display: true, // set to false to hide this section
-    title: "Studies",
+    display: true,
+    title: "Education",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "Hartpury University",
+        description: <>MSc. Strength & Conditioning (Graduated 2022).</>,
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "University of Plymouth",
+        description: <>BSc. Marketing (1st Class Hons) (Graduated 2019).</>,
       },
     ],
   },
   technical: {
-    display: true, // set to false to hide this section
-    title: "Technical skills",
+    display: true,
+    title: "Key Skills",
     skills: [
       {
-        title: "Figma",
-        description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
-        ),
+        title: "Product Analytics & Experimentation",
+        description: <>PostHog, funnel analysis, and structured A/B testing to improve activation and reduce drop-off.</>,
+      },
+      {
+        title: "AI & Data-First Product",
+        description: <>Vector embeddings, semantic matching, and measurable AI outcomes (OpenAI + Pinecone), with cost-aware delivery.</>,
+      },
+      {
+        title: "UX, Prototyping & User Research",
+        description: <>Figma-based rapid prototypes, user research, and iterative discovery cycles that de-risk build handoffs.</>,
+        tags: [{ name: "Figma", icon: "figma" }],
+      },
+      {
+        title: "Engineering Collaboration",
+        description: <>REST API integrations, GraphQL, event tracking, and scoping work with engineers to ship reliably.</>,
+      },
+      {
+        title: "Frontend Craft",
+        description: <>React + Next.js, modern JavaScript, and UI/UX polish for candidate-facing product flows.</>,
         tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+          { name: "React", icon: "javascript" },
+          { name: "Next.js", icon: "nextjs" },
         ],
       },
       {
-        title: "Next.js",
-        description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
-        ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        title: "Product Operating System",
+        description: <>RICE prioritisation, backlog management, and cross-functional execution (Linear, Notion, Slack, spreadsheets, dashboards).</>,
       },
     ],
   },
@@ -244,8 +222,8 @@ const blog: Blog = {
 const work: Work = {
   path: "/work",
   label: "Work",
-  title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
+  title: `Case Studies – ${person.name}`,
+  description: `Metric-driven PM case studies by ${person.name}`,
   // Create new project pages by adding a new .mdx file to app/blog/posts
   // All projects will be listed on the /home and /work routes
 };
@@ -301,4 +279,11 @@ const gallery: Gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+const contact: BasePageConfig = {
+  path: "/contact",
+  label: "Contact",
+  title: `Contact – ${person.name}`,
+  description: `Reach out to ${person.name} about AI + data-first product work.`,
+};
+
+export { person, social, newsletter, home, about, blog, work, gallery, contact };

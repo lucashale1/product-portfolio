@@ -1,0 +1,43 @@
+---
+title: "AI Search Infrastructure"
+publishedAt: "2026-02-05"
+summary: "Built semantic matching with vector embeddings (OpenAI) + Pinecone, enabling sub-200ms queries across millions of data points."
+images: []
+team:
+  - name: "Lucas Hale"
+    role: "Product Manager & Co-founder"
+    avatar: "/images/avatar.svg"
+    linkedIn: "https://www.linkedin.com/in/lucas-hale/"
+---
+
+## Problem
+The product needed semantic matching across a large candidate/job dataset, not just keyword search.
+
+Performance and cost constraints were real: vector search can get expensive if retrieval isn’t engineered carefully.
+
+## Approach
+I treated search as a product + infra system:
+- Define what “good match” means for users (outcomes, not relevance-score trivia).
+- Build a retrieval pipeline with measurable latency targets.
+- Align engineering on cost/perf trade-offs early so we could iterate safely.
+
+## Execution
+- Partnered with engineering to implement vector embeddings using OpenAI.
+- Selected Pinecone as the vector database and designed indexing/loading strategy for production scale.
+- Shipped the required REST API integrations and wired event tracking so we could measure downstream impact.
+- Co-led performance/data-pipeline optimizations to maintain:
+  - sub-200ms query times
+  - predictable infrastructure spend
+
+## Impact (metrics)
+- Enabled semantic matching across **3m+ data points**
+- Achieved **sub-200ms** query times
+
+## Learnings
+- AI retrieval quality depends on both embeddings and product constraints (latency, reliability, and explainability).
+- Embedding/search work needs product metrics (conversion/engagement/acceptance), not only technical evaluation.
+
+## What I’d do next
+- Add multi-stage retrieval (fast filter + semantic re-rank) to improve relevance without latency spikes.
+- Instrument “match satisfaction” signals to close the loop between user intent and model output.
+

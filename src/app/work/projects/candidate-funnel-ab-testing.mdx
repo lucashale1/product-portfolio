@@ -1,0 +1,43 @@
+---
+title: "Candidate Funnel A/B Testing"
+publishedAt: "2026-02-20"
+summary: "Reduced candidate journey drop-off by identifying friction with PostHog funnel + behavioural data, then shipping structured A/B tests that improved activation."
+images: []
+team:
+  - name: "Lucas Hale"
+    role: "Product Manager & Co-founder"
+    avatar: "/images/avatar.svg"
+    linkedIn: "https://www.linkedin.com/in/lucas-hale/"
+---
+
+## Problem
+Even when candidates showed initial interest, activation dropped mid-journey.
+
+The failure mode was not obvious: the UI felt “fine”, but candidates were hesitating at moments that required trust (e.g., confirming the tech approach early enough).
+
+## Approach
+I used a funnel-first mindset:
+- Identify where drop-off spikes (activation funnel).
+- Validate with behavioural session data (what candidates tried, struggled with, and abandoned).
+- Convert hypotheses into controlled experiments with metrics that map to real outcomes.
+
+## Execution
+- Built a structured experiment plan using an impact/effort lens (so high-traffic experiments answered the highest-uncertainty questions first).
+- Ran A/B tests on the onboarding experience, focusing on:
+  - upfront tech confirmation
+  - clarity of expectations before candidates commit time
+  - removing UX friction and ambiguity
+- Used PostHog event tracking to attribute results to specific stages and variants.
+
+## Impact (metrics)
+- Improved activation from **30% to 45%**
+- Drove the change across **10,000+ candidates**
+
+## Learnings
+- When trust is required, “small wording/flow tweaks” can have outsized conversion impact.
+- Funnel analysis only becomes useful when paired with behavioural evidence (session patterns) and clear stage attribution.
+
+## What I’d do next
+- Personalize onboarding by candidate baseline (so each candidate sees the right level of detail at the right time).
+- Add experiment guardrails to detect adverse effects early (quality, downstream acceptance, and retention).
+
