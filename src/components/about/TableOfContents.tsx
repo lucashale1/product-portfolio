@@ -16,9 +16,14 @@ interface TableOfContentsProps {
       subItems: boolean;
     };
   };
+  /**
+   * When true, renders as a fixed-position left navigation.
+   * When false, renders inline (e.g. under the avatar column).
+   */
+  fixed?: boolean;
 }
 
-const TableOfContents: React.FC<TableOfContentsProps> = ({ structure, about }) => {
+const TableOfContents: React.FC<TableOfContentsProps> = ({ structure, about, fixed = true }) => {
   const scrollTo = (id: string, offset: number) => {
     const element = document.getElementById(id);
     if (element) {
@@ -34,32 +39,44 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ structure, about }) =
 
   if (!about.tableOfContent.display) return null;
 
+  const hoverClassName = fixed ? styles.hover : undefined;
+
   return (
     <Column
-      left="0"
-      style={{
-        top: "50%",
-        transform: "translateY(-50%)",
-        whiteSpace: "nowrap",
-      }}
-      position="fixed"
-      paddingLeft="24"
-      gap="32"
-      m={{ hide: true }}
+      left={fixed ? "0" : undefined}
+      style={
+        fixed
+          ? {
+              top: "50%",
+              transform: "translateY(-50%)",
+              whiteSpace: "nowrap",
+            }
+          : { whiteSpace: "normal", alignSelf: "center" }
+      }
+      position={fixed ? "fixed" : undefined}
+      paddingLeft={fixed ? "24" : undefined}
+      gap={fixed ? "32" : "16"}
+      m={fixed ? { hide: true } : undefined}
+      horizontal="start"
+      align="start"
+      padding={fixed ? undefined : "l"}
+      radius={fixed ? undefined : "l"}
+      background={fixed ? undefined : "surface"}
+      border={fixed ? undefined : "neutral-alpha-weak"}
+      overflow={fixed ? undefined : "hidden"}
     >
       {structure
         .filter((section) => section.display)
         .map((section, sectionIndex) => (
-          <Column key={sectionIndex} gap="12">
+          <Column key={sectionIndex} gap={fixed ? "12" : "8"}>
             <Flex
               cursor="interactive"
-              className={styles.hover}
+              className={hoverClassName}
               gap="8"
               vertical="center"
               onClick={() => scrollTo(section.title, 80)}
             >
-              <Flex height="1" minWidth="16" background="neutral-strong"></Flex>
-              <Text>{section.title}</Text>
+              <Text variant="label-default-m">{section.title}</Text>
             </Flex>
             {about.tableOfContent.subItems && (
               <>
@@ -68,14 +85,13 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ structure, about }) =
                     l={{ hide: true }}
                     key={itemIndex}
                     style={{ cursor: "pointer" }}
-                    className={styles.hover}
-                    gap="12"
+                    className={hoverClassName}
+                    gap="8"
                     paddingLeft="24"
                     vertical="center"
                     onClick={() => scrollTo(item, 80)}
                   >
-                    <Flex height="1" minWidth="8" background="neutral-strong"></Flex>
-                    <Text>{item}</Text>
+                    <Text variant="label-default-s">{item}</Text>
                   </Flex>
                 ))}
               </>

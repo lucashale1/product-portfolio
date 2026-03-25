@@ -14,7 +14,7 @@ import {
   RevealFx,
   SpacingToken,
 } from "@once-ui-system/core";
-import { Footer, Header, RouteGuard, Providers } from "@/components";
+import { Footer, Header, RouteGuard, Providers, ScrollToTopOnNavigation } from "@/components";
 import { baseURL, fonts, style, dataStyle, home } from "@/resources";
 
 export async function generateMetadata() {
@@ -103,6 +103,7 @@ export default async function RootLayout({
           horizontal="center"
         >
           <Flex fillWidth minHeight="16" s={{ hide: true }} />
+          <ScrollToTopOnNavigation />
           <Header />
           <Flex zIndex={0} fillWidth padding="l" horizontal="center" flex={1}>
             <Flex horizontal="center" fillWidth minHeight="0">

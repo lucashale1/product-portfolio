@@ -6,5 +6,7 @@ export { HeadingLink } from "@/components/HeadingLink";
 export { RouteGuard } from "@/components/RouteGuard";
 export { Providers } from "@/components/Providers";
 export { ScrollToHash } from "@/components/ScrollToHash";
+export { ScrollToTop } from "@/components/ScrollToTop";
+export { ScrollToTopOnNavigation } from "@/components/ScrollToTopOnNavigation";
 export { CustomMDX } from "@/components/mdx";
 export { PageShell, PageHeroTitle, PageHeroLead, SectionTitle } from "@/components/layout";

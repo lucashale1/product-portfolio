@@ -15,7 +15,7 @@ import {
 } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
-import { ScrollToHash, CustomMDX, PageShell, PageHeroTitle, SectionTitle } from "@/components";
+import { CustomMDX, PageShell, PageHeroTitle, SectionTitle } from "@/components";
 import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
 
@@ -91,31 +91,8 @@ export default async function Project({
         }}
       />
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
-        <SmartLink href="/work">
-          <Text variant="label-strong-m">Projects</Text>
-        </SmartLink>
-        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
-          {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-        </Text>
         <PageHeroTitle>{post.metadata.title}</PageHeroTitle>
       </Column>
-      <Row marginBottom="32" horizontal="center">
-        <Row gap="16" vertical="center">
-          {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
-          <Text variant="label-default-m" onBackground="brand-weak">
-            {post.metadata.team?.map((member, idx) => (
-              <span key={idx}>
-                {idx > 0 && (
-                  <Text as="span" onBackground="neutral-weak">
-                    ,{" "}
-                  </Text>
-                )}
-                <SmartLink href={member.linkedIn}>{member.name}</SmartLink>
-              </span>
-            ))}
-          </Text>
-        </Row>
-      </Row>
       {post.metadata.images.length > 0 && (
         <Media priority aspectRatio="16 / 9" radius="m" alt="image" src={post.metadata.images[0]} />
       )}
@@ -127,7 +104,6 @@ export default async function Project({
         <SectionTitle marginBottom="24">Related projects</SectionTitle>
         <Projects exclude={[post.slug]} range={[2]} />
       </Column>
-      <ScrollToHash />
     </PageShell>
   );
 }
