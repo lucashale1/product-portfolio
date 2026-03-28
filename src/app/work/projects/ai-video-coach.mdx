@@ -1,46 +1,94 @@
 ---
-title: "AI Video Coach"
+title: "AI Video Feedback Coach"
 publishedAt: "2026-03-01"
-summary: "Shipped an AI-powered video coaching experience to help candidates interview with confidence, driving higher acceptance rates."
-images: []
-team:
-  - name: "Lucas Hale"
-    role: "Product Manager & Co-founder"
-    avatar: "/images/avatar.svg"
-    linkedIn: "https://www.linkedin.com/in/lucas-hale/"
+pagetitle: "Turning a Feature Into a Product Differentiator"
+summary: "How repositioning a video introduction tool around candidate value drove engagement, shifted product strategy and increase outcomes"
+skills: ["AI", Product Positioning", "Data-Informed Decisions", "AI Prototyping", "Claude Code"]
 ---
 
-## Problem
-Candidates want to perform well, but interview prep is hard to translate into action. The journey often breaks down at the moment they need feedback and clear next steps.
+{/* HERO IMAGE: Full-width screenshot of the final AI coaching results page. This is the first thing the reader sees, so it should immediately communicate "this is a polished, real product." */}
 
-From the hiring side, lower interview acceptance means more scheduling churn and slower hiring cycles.
+## The starting point
 
-## Approach
-I treated this as a value-delivery problem (not just an AI feature): candidates needed feedback that was immediately actionable.
+Meritt is a B2B sales recruitment platform where candidates create profiles, complete video introductions, and get matched with hiring companies. The video introduction was central to the product. It was the primary thing we sold to employers, a way to evaluate candidates beyond a CV.
 
-My product framing:
-- Learn the candidate’s intent and interview context through lightweight discovery.
-- Give coaching in the language of improvement (what to change and how).
-- Measure the outcome that matters: interview acceptance, not “engagement” vanity metrics.
+To incentise candidate completion we used a third-party supplier to create personality profiles, based on the Big 5 personality test. 
 
-## Execution
-- Wrote user stories and acceptance criteria tied to candidate outcomes.
-- Designed the experience in Figma and used rapid prototypes to validate the flow before engineering handoff.
-- Built/validated prototypes with Cursor/Claude Code to de-risk key interactions early.
-- Partnered with engineering to define the integration points for the AI video coaching pipeline and event tracking.
-- Implemented custom PostHog tracking from scratch to attribute outcomes to each stage of the coaching journey.
+After launch completion rates averaged ~30%. Being central to the product, and after questions from prospects and customers as to the 'low' number and a perceived lack of value (and subsequent missed sales).
 
-## Impact (metrics)
-- Improved interview acceptance rates by **20%**
-- Achieved **92% positive feedback** from candidates
-- Part of the broader 0→1 product motion that reached **8,000+ monthly active users**
+To understand the problem, I first checked the funnels in Posthog to confirm there weren't any clear dropoff points. Then I began having conversations with candidates. Their feedback consistently told me the same thing. Candidates found the video introduction and personality profile "nice" but didn't believe or see what it did for them personally. They completed it because the platform asked them to, not because they wanted to. For a feature that was core of the product, that was a concern.
 
-## Learnings
-- Candidate outcomes improve when value is delivered quickly: “prep” needs to become “next action” within the first session.
-- AI features require strong UX guardrails to earn trust (clear expectations, fast feedback, and concrete improvement steps).
+There was a second pressure point. The tool worked, but it was expensive, tied us into a specific psychological framework that didn't align with where we wanted the product positioned, and the supplier was planning changes to their commercial model. We were paying for something that constrained us strategically and might not be available on the same terms for much longer.
 
-## What I’d do next
-- Expand coaching personalization (adapt feedback by role, interview format, and candidate baseline).
-- Add an “explainability layer” so candidates understand why specific changes are recommended.
-- Run follow-up experiments focused on the stage that drives the biggest conversion to acceptance.
+{/* IMAGE SUGGESTION: A simple before/after comparison. Left side: the old candidate profile with the personality profile widget and basic video. Right side: the new experience with AI coaching results. If you can't get the old version, even a rough wireframe or annotated screenshot showing "what existed before" would work. Caption: "The previous candidate experience relied on a third-party personality profile and a passive video upload." */}
+
+## The opportunity
+
+Two problems were sitting next to each other. Candidates weren't engaged with the video feature, and we were dependent on a costly external tool that didn't fit our direction. The question became whether we could solve both at once.
+
+The video introduction already captured rich data. Candidates were speaking on camera for 90 to 120 seconds about their experience, motivation, and approach to sales. All of that signal was being used in one direction only: employers watched the videos. Candidates recorded them and moved on.
+
+My hypothesis based on the candidate interviews was to increase the value provided to candidates, beyond just improving their applications.
+
+This came about due to another feedback that was regularly received. The candidates didn't know whether their video was 'good' or 'the right thing'. 
+
+If we could analyse the video and return genuinely useful coaching feedback to candidates, the video introduction would shift from being a task they completed for employers to something they actively wanted to do for themselves. That would drive completion rates up, improve the quality of what employers received, and give us a reason to retire the personality profiling tool entirely.
+
+## The solution & validation
+
+Before committing engineering time to a full build, I needed to understand two things: what kind of feedback would candidates actually find useful, and could we generate it reliably from video data?
+
+After searching and investigating several options, we sourced an external supplier that provides emotional and tonal analysis on video and audio. This gave us a raw data layer covering vocal delivery, emotional expression, confidence signals, and communication patterns. The analysis was solid, but raw data alone wasn't useful to a candidate. Someone doesn't benefit from knowing their "vocal energy score is 0.73." They benefit from hearing "you tend to drop your energy at the end of answers, which can make you sound less convinced of what you're saying."
+
+To bridge that gap, we took the output and ran it through a python microservice to extract the main emotions, then ran a generative AI feedback layer on the output. The critical step here was how we trained the tone and substance of the output.
+
+Our CEO, who has deep expertise in sales hiring, worked alongside senior recruiters at our customers to define what good videos and hence good feedback looks like. We mapped the raw analysis data to the kind of observations these experts would actually make when reviewing a candidate's video. The AI wasn't generating generic advice. It was producing feedback grounded in what experienced sales hiring professionals would say.
+
+![Flowchart showing the architecure behind the AI Coach](/images/projects/project-01/ai_coach_data_pipeline_flowchart.svg)
+_Archictecture running the AI Coach_
+
+With the analysis capability mocked up by engineering, I used Claude Code to rapidly build several versions of the results and feedback UI. This let us move fast on the presentation layer without pulling engineering off the core integration work.
+
+I then put working prototypes in front of real candidates using their own videos (with their permission). We had open discussions about what information they found most useful, what surprised them, and what felt generic or unhelpful. We ran the same process with employer customers to make sure the feature aligned with what they valued in candidate profiles.
+
+This feedback loop shaped everything from the specific metrics we surfaced to the language the AI used. Some data points that looked interesting in isolation turned out to be confusing or valueless for candidates. Others that seemed minor were the ones people latched onto and found actionable.
+
+One example of this was feedback that was:
+> "Detected 12 filler words across 90 seconds"
+
+Which is useful but not particularly actionable. So it became:
+> "when you're transitioning between topics, you fill the gap with 'um' and 'sort of.' Practise landing one point, pausing, then starting the next."
+
+## What we shipped
+
+The final feature analysed a candidate's video introduction and returned a personalised coaching page covering their communication style, delivery strengths, areas for improvement, and specific suggestions for their next interview. The feedback was conversational and actionable rather than clinical or score-based.
+
+{/* IMAGE SUGGESTION: The main deliverable screenshot. Full coaching results page as a candidate would see it. This is the centrepiece image for the case study. Make it large and high quality. If you can show it on a device mockup (laptop or phone) that adds polish. */}
+
+It was built and shipped the full feature in a two-week sprint, covering the external API integration, the AI feedback microservice, the frontend results experience, and the updated candidate flow.
+
+## The results
+
+Within the first month of launch:
+
+- **1,500+ candidates** used the coaching feature
+- **Completion rates increased from 30% to 48%**, a meaningful shift for a feature that underpins the entire platform
+- **92% positive feedback**, up from 70% on the previous experience
+- The third-party personality profiling tool was retired, removing a significant cost and a strategic dependency
+
+{/* IMAGE SUGGESTION: A simple data visualisation showing the before/after metrics. A bar chart or comparison graphic covering completion rate (30% → 40%) and satisfaction (70% → 92%). Keep it clean, use your brand colours. This makes the impact scannable. */}
+
+Beyond the numbers, the positioning of the video introduction changed across the entire product. What had been framed as "record a video for employers" became "get personalised coaching on your interview skills." Marketing, email sequences, landing pages, and onboarding flows all needed updating to reflect the new value proposition.
+
+## What I learned
+
+The rollout itself was smooth from an engineering perspective. Where I underestimated the effort was in the communications and branding work required to reposition the feature across every candidate touchpoint. What started as a feature improvement became a strategic product positioning shift, and the volume of emails, landing pages, and onboarding copy that needed rewriting added time I hadn't accounted for. For future launches of this scale, I'd map out the full surface area of downstream content changes earlier in planning.
+
+The harder lesson was about making trade-off decisions with incomplete certainty. The data supported the move: low completion rates, clear candidate feedback, a costly dependency we wanted to remove. However, Meritt doesn't charge candidates or employers directly for this feature, so there was no direct revenue metric to point to as justification. The decision required conviction that improving candidate engagement and retiring an expensive dependency would compound into long-term platform value, even without a direct revenue line to attribute it to.
+
+That conviction was validated. The feature became one of the most talked-about parts of the candidate experience, and bringing the capability in-house opened up further improvements that wouldn't have been possible with the previous supplier. The trade-off was worth making, but it required being honest about what the data could confirm and what required judgment.
+
+> I completed my video introduction and uploaded it to my profile yesterday morning, the Ai coaching was really useful, it was great to get some instant feedback and understand where there's potential areas for improvement.
+
+{/* IMAGE SUGGESTION (optional closing image): A candidate testimonial or a screenshot of positive feedback from a user. If you have any Slack messages, emails, or reviews from candidates reacting to the coaching feature, one of those would be a strong closer. Alternatively, a final polished screenshot of the feature in context within the full candidate profile. */}
 
