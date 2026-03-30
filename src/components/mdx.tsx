@@ -27,6 +27,12 @@ import {
   Line,
 } from "@once-ui-system/core";
 
+function NoHoverCard({ children, ...props }: React.ComponentProps<typeof Column>) {
+  // MDX convenience wrapper around `Column` so callers can use a "card-like" API
+  // without Once UI's `Card` hover styling.
+  return <Column {...props}>{children}</Column>;
+}
+
 type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
   children: ReactNode;
@@ -204,10 +210,12 @@ const components = {
   Feedback,
   Button,
   Card,
+  NoHoverCard,
   Grid,
   Row,
   Column,
   Icon,
+  Line,
   Media,
   SmartLink,
 };
