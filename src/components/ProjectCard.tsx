@@ -66,47 +66,48 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       transition="micro-medium"
       direction="column"
     >
-      <Row fillWidth paddingX="20" paddingY="12" vertical="center">
-        <img
-          src={MERITT_LOGO_SRC}
-          alt="Meritt"
-          width={500}
-          height={150}
-          style={{
-            height: "14px",
-            width: "auto",
-            maxWidth: "min(42vw, 120px)",
-            display: "block",
-            objectFit: "contain",
-          }}
-        />
+      <Row fillWidth s={{ direction: "column" }}>
+        <Column flex={6} paddingX="20" paddingTop="20" paddingBottom="20" s={{ style: { paddingBottom: "0" } }}>
+          <Media
+            src={imageSrc}
+            alt={`${title} case study`}
+            sizes="(max-width: 960px) 100vw, 60vw"
+            fillWidth
+            aspectRatio="16 / 10"
+            radius="l"
+            border="neutral-alpha-weak"
+          />
+        </Column>
+
+        <Column flex={5} fillWidth paddingX="20" paddingY="l" gap="16" horizontal="start" align="start">
+          <img
+            src={MERITT_LOGO_SRC}
+            alt="Meritt"
+            width={500}
+            height={150}
+            style={{
+              height: "14px",
+              width: "auto",
+              maxWidth: "min(42vw, 120px)",
+              display: "block",
+              objectFit: "contain",
+            }}
+          />
+
+          <Heading as="h2" wrap="balance" variant="heading-strong-m">
+            {title}
+          </Heading>
+
+          {description?.trim() && (
+            <Text wrap="balance" onBackground="neutral-weak" variant="body-default-s">
+              {description}
+            </Text>
+          )}
+
+          <Line background="neutral-alpha-medium" />
+          <ProjectSkillTags skills={skills} />
+        </Column>
       </Row>
-
-      <Media
-        src={imageSrc}
-        alt={`${title} case study`}
-        sizes="(max-width: 960px) 100vw, 960px"
-        fillWidth
-        aspectRatio="4 / 3"
-        radius="l"
-        border="neutral-alpha-weak"
-      />
-
-      <Column fillWidth paddingX="20" paddingY="24" gap="8">
-        <Heading as="h2" wrap="balance" variant="heading-strong-m">
-          {title}
-        </Heading>
-
-        {description?.trim() && (
-          <Text wrap="balance" onBackground="neutral-weak" variant="body-default-s">
-            {description}
-          </Text>
-        )}
-      </Column>
-
-      <Line background="neutral-alpha-medium" />
-
-      <ProjectSkillTags skills={skills} padded />
     </Card>
   );
 };
