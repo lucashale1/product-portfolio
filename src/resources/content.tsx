@@ -6,7 +6,7 @@ const person: Person = {
   lastName: "Hale",
   name: "Lucas Hale",
   role: "Product Manager & Co-founder at Meritt",
-  avatar: "/images/avatar.svg",
+  avatar: "/images/lucas-hale-picture.jpeg",
   email: "lucas.hale10@gmail.com",
   location: "Somerset, UK",
   timeZone: "Europe/London",
