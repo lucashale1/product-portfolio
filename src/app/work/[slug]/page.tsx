@@ -95,7 +95,16 @@ export default async function Project({
         <ProjectSkillTags skills={post.metadata.skills} horizontal="center" />
       </Column>
       {post.metadata.images.length > 0 && (
-        <Media priority aspectRatio="16 / 9" radius="m" alt="image" src={post.metadata.images[0]} />
+        <Column style={{ margin: "auto" }} as="div" maxWidth="xs">
+          <Media
+            priority
+            aspectRatio="16 / 9"
+            radius="m"
+            alt="image"
+            src={post.metadata.images[0]}
+            fillWidth
+          />
+        </Column>
       )}
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
         <CustomMDX source={post.content} />

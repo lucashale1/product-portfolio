@@ -3,36 +3,127 @@ title: "AI Video Feedback Coach"
 publishedAt: "2026-03-01"
 pagetitle: "Turning a Feature Into a Product Differentiator"
 summary: "How repositioning a video introduction tool around candidate value drove engagement, shifted product strategy and increase outcomes"
+image: "/images/projects/ai-video-coach/ai-video-coach-main-image.png"
+images:
+  - "/images/projects/ai-video-coach/ai-video-coach-main-image.png"
 skills:
-  - label: PostHog
+  - label: Posthog
     icon: posthog
     variant: warning
-  - label: OpenAI
+  - label: Claude Code
     icon: openai
     variant: brand
-  - label: Discovery
-    icon: globe
+  - label: User Research
+    icon: person
     variant: success
-  - label: REST APIs
-    icon: swagger
-    variant: neutral
+  - label: AI Product Development
+    icon: rocket
+    variant: info
 ---
 
-{/* HERO IMAGE: Full-width screenshot of the final AI coaching results page. This is the first thing the reader sees, so it should immediately communicate "this is a polished, real product." */}
+<Column fillWidth gap="16" marginBottom="24">
+  <NoHoverCard
+    fillWidth
+    marginTop="0"
+    marginBottom="24"
+    paddingTop="0"
+    padding="24"
+    radius="l"
+    border="brand-alpha-medium"
+    background="brand-alpha-weak"
+    shadow="l"
+    overflow="hidden"
+    direction="column"
+    gap="12"
+  >
+    <Column fillWidth gap="12">
+      <Heading as="h2" variant="heading-strong-m" wrap="balance">
+        ## Summary
+      </Heading>
+      <Text
+        variant="body-default-m"
+        onBackground="neutral-weak"
+        style={{ lineHeight: "175%" }}
+        wrap="balance"
+      >
+        Meritt's video introduction was core to the product for employers but candidates didn't see personal value in completing one. By layering emotional analysis and expert-informed AI feedback onto the existing video, we turned a passive task into a personalised coaching experience.
+      </Text>
+    </Column>
+  </NoHoverCard>
+
+  <NoHoverCard
+    fillWidth
+    marginBottom="24"
+    padding="0"
+    radius="xl"
+    border="neutral-alpha-medium"
+    overflow="hidden"
+    background="transparent"
+  >
+    <Grid columns="2" s={{ columns: 1 }} gap="0" fillWidth>
+      <Column padding="24" background="neutral-alpha-weak" gap="12" borderRight="neutral-alpha-medium">
+        <Text variant="label-default-s" onBackground="neutral-strong">
+          Before
+        </Text>
+        <Column gap="12">
+          <Column gap="4">
+            <Heading as="h4" variant="display-strong-m" onBackground="neutral-strong">
+             # 30%
+            </Heading>
+            <Text variant="label-default-s" onBackground="neutral-weak">
+              Completion rate
+            </Text>
+          </Column>
+          <Column gap="4">
+            <Heading as="h4" variant="display-strong-m" onBackground="neutral-strong">
+              # 70%
+            </Heading>
+            <Text variant="label-default-s" onBackground="neutral-weak">
+              Positive feedback
+            </Text>
+          </Column>
+        </Column>
+      </Column>
+
+      <Column padding="24" background="success-alpha-weak" gap="12">
+        <Text variant="label-default-s" onBackground="success-strong">
+          After
+        </Text>
+        <Column gap="12">
+          <Column gap="4">
+            <Heading as="h4" variant="display-strong-m" onBackground="success-strong">
+              # 48%
+            </Heading>
+            <Text variant="label-default-s" onBackground="success-weak">
+              Completion rate
+            </Text>
+          </Column>
+          <Column gap="4">
+            <Heading as="h4" variant="display-strong-m" onBackground="success-strong">
+              # 92%
+            </Heading>
+            <Text variant="label-default-s" onBackground="success-weak">
+              Positive candidate feedback
+            </Text>
+          </Column>
+        </Column>
+      </Column>
+    </Grid>
+  </NoHoverCard>
+</Column>
+
 
 ## The starting point
 
 Meritt is a B2B sales recruitment platform where candidates create profiles, complete video introductions, and get matched with hiring companies. The video introduction was central to the product. It was the primary thing we sold to employers, a way to evaluate candidates beyond a CV.
 
-To incentise candidate completion we used a third-party supplier to create personality profiles, based on the Big 5 personality test. 
+To incentivise candidate completion we used a third-party supplier to create personality profiles, based on the Big 5 personality test. 
 
 After launch completion rates averaged ~30%. Being central to the product, and after questions from prospects and customers as to the 'low' number and a perceived lack of value (and subsequent missed sales).
 
 To understand the problem, I first checked the funnels in Posthog to confirm there weren't any clear dropoff points. Then I began having conversations with candidates. Their feedback consistently told me the same thing. Candidates found the video introduction and personality profile "nice" but didn't believe or see what it did for them personally. They completed it because the platform asked them to, not because they wanted to. For a feature that was core of the product, that was a concern.
 
 There was a second pressure point. The tool worked, but it was expensive, tied us into a specific psychological framework that didn't align with where we wanted the product positioned, and the supplier was planning changes to their commercial model. We were paying for something that constrained us strategically and might not be available on the same terms for much longer.
-
-{/* IMAGE SUGGESTION: A simple before/after comparison. Left side: the old candidate profile with the personality profile widget and basic video. Right side: the new experience with AI coaching results. If you can't get the old version, even a rough wireframe or annotated screenshot showing "what existed before" would work. Caption: "The previous candidate experience relied on a third-party personality profile and a passive video upload." */}
 
 ## The opportunity
 
@@ -56,7 +147,7 @@ To bridge that gap, we took the output and ran it through a python microservice 
 
 Our CEO, who has deep expertise in sales hiring, worked alongside senior recruiters at our customers to define what good videos and hence good feedback looks like. We mapped the raw analysis data to the kind of observations these experts would actually make when reviewing a candidate's video. The AI wasn't generating generic advice. It was producing feedback grounded in what experienced sales hiring professionals would say.
 
-![Flowchart showing the architecure behind the AI Coach](/images/projects/project-01/ai_coach_data_pipeline_flowchart.svg)
+![Flowchart showing the architecure behind the AI Coach](/images/projects/ai-video-coach/ai_coach_data_pipeline_flowchart.svg)
 _Archictecture running the AI Coach_
 
 With the analysis capability mocked up by engineering, I used Claude Code to rapidly build several versions of the results and feedback UI. This let us move fast on the presentation layer without pulling engineering off the core integration work.
@@ -75,7 +166,8 @@ Which is useful but not particularly actionable. So it became:
 
 The final feature analysed a candidate's video introduction and returned a personalised coaching page covering their communication style, delivery strengths, areas for improvement, and specific suggestions for their next interview. The feedback was conversational and actionable rather than clinical or score-based.
 
-{/* IMAGE SUGGESTION: The main deliverable screenshot. Full coaching results page as a candidate would see it. This is the centrepiece image for the case study. Make it large and high quality. If you can show it on a device mockup (laptop or phone) that adds polish. */}
+![Feedback given to candidates by the coach](/images/projects/ai-video-coach/ai-coach-feedback.png)
+_Example of feedback given by the AI Coach_
 
 It was built and shipped the full feature in a two-week sprint, covering the external API integration, the AI feedback microservice, the frontend results experience, and the updated candidate flow.
 
@@ -88,8 +180,6 @@ Within the first month of launch:
 - **92% positive feedback**, up from 70% on the previous experience
 - The third-party personality profiling tool was retired, removing a significant cost and a strategic dependency
 
-{/* IMAGE SUGGESTION: A simple data visualisation showing the before/after metrics. A bar chart or comparison graphic covering completion rate (30% → 40%) and satisfaction (70% → 92%). Keep it clean, use your brand colours. This makes the impact scannable. */}
-
 Beyond the numbers, the positioning of the video introduction changed across the entire product. What had been framed as "record a video for employers" became "get personalised coaching on your interview skills." Marketing, email sequences, landing pages, and onboarding flows all needed updating to reflect the new value proposition.
 
 ## What I learned
@@ -100,7 +190,7 @@ The harder lesson was about making trade-off decisions with incomplete certainty
 
 That conviction was validated. The feature became one of the most talked-about parts of the candidate experience, and bringing the capability in-house opened up further improvements that wouldn't have been possible with the previous supplier. The trade-off was worth making, but it required being honest about what the data could confirm and what required judgment.
 
-> I completed my video introduction and uploaded it to my profile yesterday morning, the Ai coaching was really useful, it was great to get some instant feedback and understand where there's potential areas for improvement.
+## Candidate Feedback
 
-{/* IMAGE SUGGESTION (optional closing image): A candidate testimonial or a screenshot of positive feedback from a user. If you have any Slack messages, emails, or reviews from candidates reacting to the coaching feature, one of those would be a strong closer. Alternatively, a final polished screenshot of the feature in context within the full candidate profile. */}
-
+![Feedback from candidates](/images/projects/ai-video-coach/ai-coach-feedback-candidates.png)
+_Feedback from candidates on the feature_
