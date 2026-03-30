@@ -1,5 +1,5 @@
 import { Avatar, Button, Column, Meta, Row, Schema, Text } from "@once-ui-system/core";
-import { PageShell, PageHeroTitle, PageHeroLead } from "@/components";
+import { PageShell, PageHeroTitle } from "@/components";
 import { about, baseURL, contact, person, social } from "@/resources";
 
 export async function generateMetadata() {
@@ -35,7 +35,6 @@ export default function Contact() {
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <Avatar src={person.avatar} size="xl" />
         <PageHeroTitle>Contact Lucas</PageHeroTitle>
-        <PageHeroLead align="center">{contact.description}</PageHeroLead>
       </Column>
 
       <Row fillWidth horizontal="center" gap="12" s={{ direction: "column" }}>

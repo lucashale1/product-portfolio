@@ -5,8 +5,24 @@ type ColumnProps = ComponentProps<typeof Column>;
 type HeadingProps = ComponentProps<typeof Heading>;
 type TextProps = ComponentProps<typeof Text>;
 
-export function PageShell({ maxWidth = "m", gap = "xl", paddingY = "12", horizontal = "center", ...rest }: ColumnProps) {
-  return <Column maxWidth={maxWidth} gap={gap} paddingY={paddingY} horizontal={horizontal} {...rest} />;
+export function PageShell({
+  maxWidth = "m",
+  gap = "xl",
+  paddingTop = "24",
+  paddingBottom = "12",
+  horizontal = "center",
+  ...rest
+}: ColumnProps) {
+  return (
+    <Column
+      maxWidth={maxWidth}
+      gap={gap}
+      paddingTop={paddingTop}
+      paddingBottom={paddingBottom}
+      horizontal={horizontal}
+      {...rest}
+    />
+  );
 }
 
 export function PageHeroTitle({

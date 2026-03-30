@@ -40,6 +40,7 @@ export default async function RootLayout({
       suppressHydrationWarning
       as="html"
       lang="en"
+      data-scroll-behavior="smooth"
       fillWidth
       className={classNames(
         fonts.heading.variable,
@@ -100,11 +101,12 @@ export default async function RootLayout({
           as="body"
           background="page"
           fillWidth
-          style={{ minHeight: "100vh" }}
+          style={{ minHeight: "100vh", position: "relative" }}
           margin="0"
           padding="0"
           horizontal="center"
         >
+          <div className="page-top-radial" aria-hidden="true" />
           <Flex fillWidth minHeight="16" s={{ hide: true }} />
           <ScrollToTopOnNavigation />
           <Header />

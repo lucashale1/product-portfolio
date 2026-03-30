@@ -91,12 +91,20 @@ function slugify(str: string): string {
   }).replace(/\-\-+/g, "-"); // Replace multiple - with single -
 }
 
-function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
+function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6", withLink = true) {
   const CustomHeading = ({
     children,
     ...props
   }: Omit<React.ComponentProps<typeof HeadingLink>, "as" | "id">) => {
     const slug = slugify(children as string);
+    if (!withLink) {
+      return (
+        <Heading marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
+          {children}
+        </Heading>
+      );
+    }
+
     return (
       <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
         {children}
@@ -184,46 +192,52 @@ function createHR() {
   );
 }
 
-const components = {
-  p: createParagraph as any,
-  h1: createHeading("h1") as any,
-  h2: createHeading("h2") as any,
-  h3: createHeading("h3") as any,
-  h4: createHeading("h4") as any,
-  h5: createHeading("h5") as any,
-  h6: createHeading("h6") as any,
-  img: createImage as any,
-  a: CustomLink as any,
-  code: createInlineCode as any,
-  pre: createCodeBlock as any,
-  ol: createList("ol") as any,
-  ul: createList("ul") as any,
-  li: createListItem as any,
-  hr: createHR as any,
-  Heading,
-  Text,
-  CodeBlock,
-  InlineCode,
-  Accordion,
-  AccordionGroup,
-  Table,
-  Feedback,
-  Button,
-  Card,
-  NoHoverCard,
-  Grid,
-  Row,
-  Column,
-  Icon,
-  Line,
-  Media,
-  SmartLink,
-};
+function getComponents(enableHeadingLinks = true) {
+  return {
+    p: createParagraph as any,
+    h1: createHeading("h1", enableHeadingLinks) as any,
+    h2: createHeading("h2", enableHeadingLinks) as any,
+    h3: createHeading("h3", enableHeadingLinks) as any,
+    h4: createHeading("h4", enableHeadingLinks) as any,
+    h5: createHeading("h5", enableHeadingLinks) as any,
+    h6: createHeading("h6", enableHeadingLinks) as any,
+    img: createImage as any,
+    a: CustomLink as any,
+    code: createInlineCode as any,
+    pre: createCodeBlock as any,
+    ol: createList("ol") as any,
+    ul: createList("ul") as any,
+    li: createListItem as any,
+    hr: createHR as any,
+    Heading,
+    Text,
+    CodeBlock,
+    InlineCode,
+    Accordion,
+    AccordionGroup,
+    Table,
+    Feedback,
+    Button,
+    Card,
+    NoHoverCard,
+    Grid,
+    Row,
+    Column,
+    Icon,
+    Line,
+    Media,
+    SmartLink,
+  };
+}
+
+const defaultComponents = getComponents();
 
 type CustomMDXProps = MDXRemoteProps & {
-  components?: typeof components;
+  components?: typeof defaultComponents;
+  enableHeadingLinks?: boolean;
 };
 
 export function CustomMDX(props: CustomMDXProps) {
+  const components = getComponents(props.enableHeadingLinks ?? true);
   return <MDXRemote options={{ blockJS: false }} {...props} components={{ ...components, ...(props.components || {}) }} />;
 }

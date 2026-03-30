@@ -1,4 +1,6 @@
 import {
+  Avatar,
+  Button,
   Column,
   Row,
   Schema,
@@ -46,13 +48,37 @@ export default function Home() {
             <PageHeroTitle>{home.headline}</PageHeroTitle>
 
             <PageHeroLead align="center">{home.subline}</PageHeroLead>
+
+            <Row horizontal="center" marginTop="24">
+              <Button
+                id="about"
+                data-border="rounded"
+                href={about.path}
+                variant="secondary"
+                size="m"
+                weight="default"
+                arrowIcon
+              >
+                <Row gap="8" vertical="center" paddingRight="4">
+                  {about.avatar.display && (
+                    <Avatar
+                      marginRight="8"
+                      style={{ marginLeft: "-0.75rem" }}
+                      src={person.avatar}
+                      size="m"
+                    />
+                  )}
+                  {about.title}
+                </Row>
+              </Button>
+            </Row>
           </Column>
         </Row>
       </Column>
 
-      <Column fillWidth gap="l" marginTop="40">
+      <Column fillWidth gap="l">
         <Row fillWidth horizontal="center">
-          <SectionTitle>Featured case studies</SectionTitle>
+          <SectionTitle>Featured work</SectionTitle>
         </Row>
 
         <Projects range={[1, 4]} />

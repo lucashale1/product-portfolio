@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
+import { Fade, Flex, Row, ToggleButton } from "@once-ui-system/core";
 
 import { routes, display, person, about, blog, work, gallery, contact } from "@/resources";
 import styles from "./Header.module.scss";
@@ -86,52 +86,13 @@ export const Header = () => {
           >
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
-              )}
-              <Line background="neutral-alpha-medium" vert maxHeight="24" />
-              {routes["/about"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/about"
-                      label={about.label}
-                      selected={pathname === "/about"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/about"
-                      selected={pathname === "/about"}
-                    />
-                  </Row>
-                </>
-              )}
-              <Line background="neutral-alpha-medium" vert maxHeight="24" />
-              {routes["/contact"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="email"
-                      href="/contact"
-                      label={contact.label}
-                      selected={pathname === "/contact"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="email"
-                      href="/contact"
-                      selected={pathname === "/contact"}
-                    />
-                  </Row>
-                </>
+                <ToggleButton className={styles.navToggle} prefixIcon="home" href="/" selected={pathname === "/"} />
               )}
               {routes["/work"] && (
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
+                      className={styles.navToggle}
                       prefixIcon="grid"
                       href="/work"
                       label={work.label}
@@ -140,9 +101,52 @@ export const Header = () => {
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
+                      className={styles.navToggle}
                       prefixIcon="grid"
                       href="/work"
                       selected={pathname.startsWith("/work")}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/about"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      className={styles.navToggle}
+                      prefixIcon="person"
+                      href="/about"
+                      label={about.label}
+                      selected={pathname === "/about"}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      className={styles.navToggle}
+                      prefixIcon="person"
+                      href="/about"
+                      selected={pathname === "/about"}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/contact"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      className={styles.navToggle}
+                      prefixIcon="email"
+                      href="/contact"
+                      label={contact.label}
+                      selected={pathname === "/contact"}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      className={styles.navToggle}
+                      prefixIcon="email"
+                      href="/contact"
+                      selected={pathname === "/contact"}
                     />
                   </Row>
                 </>
@@ -151,6 +155,7 @@ export const Header = () => {
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
+                      className={styles.navToggle}
                       prefixIcon="book"
                       href="/blog"
                       label={blog.label}
@@ -159,6 +164,7 @@ export const Header = () => {
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
+                      className={styles.navToggle}
                       prefixIcon="book"
                       href="/blog"
                       selected={pathname.startsWith("/blog")}
@@ -170,6 +176,7 @@ export const Header = () => {
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
+                      className={styles.navToggle}
                       prefixIcon="gallery"
                       href="/gallery"
                       label={gallery.label}
@@ -178,6 +185,7 @@ export const Header = () => {
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
+                      className={styles.navToggle}
                       prefixIcon="gallery"
                       href="/gallery"
                       selected={pathname.startsWith("/gallery")}

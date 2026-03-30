@@ -1,5 +1,15 @@
 @use "./breakpoints.scss" as breakpoints;
 
+/** Tighter icon ↔ label spacing than default ToggleButton (gap-8 + label px-4). */
+.navToggle {
+    gap: var(--static-space-4) !important;
+
+    :global(.font-label) {
+        padding-inline-start: var(--static-space-2) !important;
+        padding-inline-end: var(--static-space-4) !important;
+    }
+}
+
 .mask {
     pointer-events: none;
     backdrop-filter: blur(0.5rem);

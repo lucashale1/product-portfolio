@@ -43,7 +43,7 @@ const home: Home = {
   label: "Home",
   title: `Lucas Hale - Product Manager Portfolio`,
   description: `AI and data-led Product Manager portfolio: strategy, discovery, UX, and measurable outcomes.`,
-  headline: <>AI and data-led product management</>,
+  headline: <>AI and data-led product manager</>,
   featured: {
     display: true,
     title: (
@@ -284,7 +284,7 @@ const contact: BasePageConfig = {
   path: "/contact",
   label: "Contact",
   title: `Contact – ${person.name}`,
-  description: `Reach out to ${person.name} about AI + data-first product work.`,
+  description: `Contact ${person.name}.`,
 };
 
 export { person, social, newsletter, home, about, blog, work, gallery, contact };
