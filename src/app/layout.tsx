@@ -16,7 +16,7 @@ import {
   SpacingToken,
 } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers, ScrollToTopOnNavigation } from "@/components";
-import { baseURL, fonts, style, dataStyle, home, person } from "@/resources";
+import { baseURL, fonts, style, dataStyle, home } from "@/resources";
 
 export async function generateMetadata() {
   return {
@@ -27,10 +27,6 @@ export async function generateMetadata() {
       path: home.path,
       image: home.image,
     }),
-    icons: {
-      icon: [{ url: person.avatar, type: "image/jpeg" }],
-      apple: [{ url: person.avatar, type: "image/jpeg" }],
-    },
   };
 }
 
