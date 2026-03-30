@@ -1,6 +1,11 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { isValidIconName } from "@/resources/icons";
+import type {
+  ProjectSkillTag,
+  ProjectSkillVariant,
+} from "@/types/project.types";
 
 type Team = {
   name: string;
@@ -19,7 +24,43 @@ type Metadata = {
   tag?: string;
   team: Team[];
   link?: string;
+  skills: ProjectSkillTag[];
 };
+
+const SKILL_VARIANTS: ProjectSkillVariant[] = [
+  "neutral",
+  "brand",
+  "accent",
+  "info",
+  "danger",
+  "warning",
+  "success",
+];
+
+function isSkillVariant(v: string): v is ProjectSkillVariant {
+  return (SKILL_VARIANTS as readonly string[]).includes(v);
+}
+
+function normalizeSkills(raw: unknown): ProjectSkillTag[] {
+  if (!Array.isArray(raw)) return [];
+
+  const out: ProjectSkillTag[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const o = item as Record<string, unknown>;
+    const label = typeof o.label === "string" ? o.label.trim() : "";
+    if (!label) continue;
+
+    const iconStr = typeof o.icon === "string" ? o.icon : "";
+    const icon = isValidIconName(iconStr) ? iconStr : "globe";
+
+    const variantStr = typeof o.variant === "string" ? o.variant : "neutral";
+    const variant = isSkillVariant(variantStr) ? variantStr : "neutral";
+
+    out.push({ label, icon, variant });
+  }
+  return out;
+}
 
 import { notFound } from "next/navigation";
 
@@ -49,6 +90,7 @@ function readMDXFile(filePath: string) {
     tag: data.tag || [],
     team: data.team || [],
     link: data.link || "",
+    skills: normalizeSkills(data.skills),
   };
 
   return { metadata, content };

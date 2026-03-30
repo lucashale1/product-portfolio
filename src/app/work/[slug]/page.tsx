@@ -15,7 +15,7 @@ import {
 } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
-import { CustomMDX, PageShell, PageHeroTitle, SectionTitle } from "@/components";
+import { CustomMDX, PageShell, PageHeroTitle, SectionTitle, ProjectSkillTags } from "@/components";
 import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
 
@@ -92,6 +92,7 @@ export default async function Project({
       />
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <PageHeroTitle>{post.metadata.title}</PageHeroTitle>
+        <ProjectSkillTags skills={post.metadata.skills} horizontal="center" />
       </Column>
       {post.metadata.images.length > 0 && (
         <Media priority aspectRatio="16 / 9" radius="m" alt="image" src={post.metadata.images[0]} />

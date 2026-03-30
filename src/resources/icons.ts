@@ -78,3 +78,7 @@ export const iconLibrary: Record<string, IconType> = {
 
 export type IconLibrary = typeof iconLibrary;
 export type IconName = keyof IconLibrary;
+
+export function isValidIconName(name: string): name is IconName {
+  return Object.prototype.hasOwnProperty.call(iconLibrary, name);
+}
