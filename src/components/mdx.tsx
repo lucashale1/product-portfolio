@@ -1,5 +1,5 @@
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
-import React, { ReactNode } from "react";
+import React, { ComponentProps, ReactNode } from "react";
 import { slugify as transliterate } from "transliteration";
 
 import {
@@ -91,22 +91,31 @@ function slugify(str: string): string {
   }).replace(/\-\-+/g, "-"); // Replace multiple - with single -
 }
 
+/** Rest props safe for `Heading` (not `HeadingLink`/`Row` div semantics). */
+type HeadingRest = Omit<
+  ComponentProps<typeof Heading>,
+  "as" | "children" | "id" | "marginBottom" | "marginTop"
+>;
+
 function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6", withLink = true) {
   const CustomHeading = ({
     children,
+    // `HeadingLink` extends `Row`; `wrap` there is flex-wrap (boolean). `Heading` uses
+    // `TextProps.wrap` (CSS text-wrap). Do not spread Row's `wrap` onto `Heading`.
+    wrap,
     ...props
   }: Omit<React.ComponentProps<typeof HeadingLink>, "as" | "id">) => {
     const slug = slugify(children as string);
     if (!withLink) {
       return (
-        <Heading marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
+        <Heading marginTop="24" marginBottom="12" as={as} id={slug} {...(props as HeadingRest)}>
           {children}
         </Heading>
       );
     }
 
     return (
-      <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
+      <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} wrap={wrap} {...props}>
         {children}
       </HeadingLink>
     );
