@@ -154,9 +154,17 @@ function createList(as: "ul" | "ol") {
   return ({ children }: { children: ReactNode }) => <List as={as}>{children}</List>;
 }
 
-function createListItem({ children }: { children: ReactNode }) {
+function createListItem({ children, ...props }: { children: ReactNode } & Omit<React.ComponentProps<typeof ListItem>, "children">) {
   return (
-    <ListItem marginTop="4" marginBottom="8" style={{ lineHeight: "175%" }}>
+    <ListItem
+      marginTop="4"
+      marginBottom="8"
+      // Match paragraph typography so list text doesn't look "whiter" than normal copy.
+      variant="body-default-m"
+      onBackground="neutral-medium"
+      style={{ lineHeight: "175%" }}
+      {...props}
+    >
       {children}
     </ListItem>
   );
