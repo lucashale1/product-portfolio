@@ -16,16 +16,22 @@ import {
   SpacingToken,
 } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers, ScrollToTopOnNavigation } from "@/components";
-import { baseURL, fonts, style, dataStyle, home } from "@/resources";
+import { baseURL, fonts, style, dataStyle, home, person } from "@/resources";
 
 export async function generateMetadata() {
-  return Meta.generate({
-    title: home.title,
-    description: home.description,
-    baseURL: baseURL,
-    path: home.path,
-    image: home.image,
-  });
+  return {
+    ...Meta.generate({
+      title: home.title,
+      description: home.description,
+      baseURL: baseURL,
+      path: home.path,
+      image: home.image,
+    }),
+    icons: {
+      icon: [{ url: person.avatar, type: "image/jpeg" }],
+      apple: [{ url: person.avatar, type: "image/jpeg" }],
+    },
+  };
 }
 
 export default async function RootLayout({
