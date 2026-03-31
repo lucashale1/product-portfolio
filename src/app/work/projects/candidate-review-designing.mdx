@@ -1,7 +1,7 @@
 ---
-title: "Candidate Review Designing"
+title: "Redesigning the Candidate Review Experience"
 publishedAt: "2026-01-20"
-summary: "Designed a reviewer workflow (and AI-assisted review surfaces) to help teams evaluate candidates faster with consistent decision-making."
+summary: "How research, prototyping and iterative design turned a generic review page into a fast, opinionated workflow."
 image: "/images/projects/candidate-review/candidate-review-main-image.png"
 images:
   - "/images/projects/candidate-review/candidate-review-main-image.png"
@@ -11,54 +11,84 @@ team:
     avatar: "/images/lucas-hale-picture.jpeg"
     linkedIn: "https://www.linkedin.com/in/lucas-hale/"
 skills:
-  - label: OpenAI
-    icon: openai
-    variant: brand
+  - label: Continuous Discovery
+    icon: globe
+    variant: success
+  - label: UI/UX Design
+    icon: person
+    variant: neutral
   - label: Figma
     icon: figma
     variant: accent
-  - label: Discovery
-    icon: globe
-    variant: success
-  - label: Stakeholder alignment
-    icon: person
-    variant: neutral
+  - label: Prototyping
+    icon: document
+    variant: brand
 ---
 
-## Problem
-Reviewing candidates is time-consuming and subjective. Teams need to:
-- Compare candidates efficiently across stages.
-- Reduce inconsistency between reviewers.
-- Preserve transparency so decisions feel fair and explainable.
+## The starting point
 
-The product’s challenge wasn’t just “building UI”, it was designing a workflow that makes high-quality review the easiest path.
+Meritt's candidate review page is where employers spend the majority of their time on the platform. When a candidate applies for a role, the hiring manager or recruiter opens this page to evaluate them one by one, deciding whether to progress or reject before moving to the next.
+ 
+We were hearing frustration from two directions at once. Customers were telling us the CV data on the review page couldn't be trusted. We had built a system that parsed uploaded CVs and displayed the extracted information as a timeline and experience section. The idea was sound, but roughly 10% of CVs had formatting issues that caused parsing errors. When a recruiter sees incorrect data once, they stop trusting it entirely. After digging into how recruiters and hiring managers actually used CV data across the industry, I found that most of them, even when the extraction worked perfectly, still wanted to see the original CV. The parsed version was a useful supplement but not a replacement.
+ 
+The other frustration was the workflow itself. Candidate video introductions (a core feature of the product) lived on a separate tab from the CV information. Recruiters were consistently doing the same thing: skimming the CV contents first, then switching tabs to start the video. Two clicks and a context switch for something they did hundreds of times a day.
+ 
+{/* IMAGE SUGGESTION: Screenshot or wireframe of the old review page, if available. Even a rough sketch showing the previous layout with video on one tab and CV content on another would work. Caption: "The previous review page separated the video and CV information across different tabs." */}
+ 
+This was where employers spent roughly 90% of their time on the platform, and it had clear problems. The goal was to reduce the time to review each candidate by 15% (a statistically significant amount for the number of users on the platform). 
 
-## Approach
-I approached this as a “decision workflow” problem:
-- Research how reviewers actually work under time pressure.
-- Define a lightweight rubric that turns qualitative signals into consistent evaluation.
-- Use AI assistance to surface structured summaries and candidate highlights, without hiding the underlying reasoning.
+Our CEO tasked me with at the same time as improving the usability to turn the review experience into a genuine USP for the product. The brief for this was ambigious: make it something that stands out. 
+ 
 
-## Execution
-- Created reviewer journey maps and ran targeted discovery conversations to understand friction points and handoff moments.
-- Designed the review workflow in Figma (review queue, per-candidate summary, evidence-first sections, and decision actions).
-- Validated key screens with rapid prototypes (Cursor/Claude Code-assisted iteration + quick feedback loops) before engineering handoff.
-- Partnered with engineering to wire AI-assisted review surfaces and instrument PostHog event tracking to learn:
-  - review start rate
-  - review completion time
-  - rubric usage vs skip behaviour
+## Discovery and requirements
 
-## Impact (metrics)
-- Review completion time: **~X% faster (metrics pending)**
-- Reviewer adoption: **~Y% of reviews used the AI-assisted surfaces (metrics pending)**
-- Decision consistency: **improved consistency signals (metrics pending)**
+I started by researching how competitors handled candidate review, then broadened to look at how other productivity and information-dense tools approached similar problems. One product I drew particular inspiration from was Superhuman, the email client. What stood out was their use of keyboard shortcuts for moving quickly through a queue of items. Reviewing candidates one by one through a stack of applications is fundamentally similar to processing a full inbox. Speed and flow matter.
 
-## Learnings
-- Review workflows only stick when AI assistance is clearly controllable and transparent.
-- Instrumentation needs to measure both “usage” and “decision quality”, otherwise teams optimize for the wrong behaviours.
+{/* IMAGE SUGGESTION: Photos of your paper sketches. These are gold for a portfolio case study because they show the thinking before it was polished. If you have multiple pages, show 2-3 side by side. Caption: "Early paper sketches exploring different layouts for combining video, CV, and key candidate data." */}
 
-## What I’d do next
-- Finalize success metrics with engineering + stakeholders (time-to-review, rubric adherence, and downstream acceptance/quality).
-- Add calibration loops (periodic reviewer alignment prompts) to keep rubric interpretation consistent.
-- Improve AI evidence citation so reviewers can quickly verify key claims.
+Alongside the design exploration, I was running continuous discovery conversations with recruiters and hiring managers. I needed to understand what information they reached for first when evaluating a sales candidate. The answer was consistent across conversations: languages spoken, quota attainment and sales performance figures, industry experience, and years in sales. These were the filters that determined whether someone was worth a closer look. I continued this discovery throughout the entire design and build process, constantly evolving my knowledge of the problem space.
 
+That gave me three clear requirements. 
+* The page needed to surface those key data points immediately, without the recruiter having to dig through a full CV. 
+* It needed to keep the original CV accessible in one click for when they wanted the full picture. 
+* Both of those, alongside the video, had to live on the same screen.
+
+## Design and prototyping
+
+I started on paper, sketching different layouts for how the video, extracted data, and CV access could coexist on a single page. These sketches went through several rounds, each time exploring different ways to balance information density with clarity.
+
+{/* IMAGE: Paper designs of the original plan */}
+
+From paper I moved into Figma, building simple mockups that I could put in front of customers and prospects. These weren't high-fidelity designs. They were layout explorations, enough to have a conversation about what worked and what didn't. I showed them to existing customers and used them in prospect conversations to understand what would make the review experience genuinely compelling.
+
+{/* IMAGE SUGGESTION: Figma mockups showing the evolution of the design. If you have 2-3 iterations, a side-by-side progression works well here. Caption: "Figma mockups evolved through multiple rounds of customer feedback." */}
+
+The feedback from these sessions shaped the direction. Once I had a version that customers were responding well to, I used Claude Code to build a working prototype. It was functional enough that employers could review 20 real candidates through it, which meant I could gather both qualitative feedback and usability metrics from the same sessions. It also meant I could let the custoemr directly interact without having to talk it through, resulting in more realistic feedback, as I could watch back them using the page and see what they interacted with and how. 
+
+The prototype testing surfaced things the mockups couldn't. Some of the layout choices that looked clean in Figma weren't intuitive in practice. The flow for accessing the full CV didn't come naturally. More surprisingly, several users reached for their mouse to navigate between candidates despite the keyboard shortcuts being available, which I hadn't allowed for. The reason being, I wanted to drive users to use the shortcuts so that they moved faster. Allowing the mouse meant they could choose the slower option. On reflection, it was a step too far and alienated a natural way to use software. So I went back and made sure both input methods were fully supported, with keyboard shortcuts for those who wanted speed and mouse navigation for those who preferred it.
+
+That round of changes took a few conversations, discussion and a small design adjustment. Catching it in prototyping rather than post-launch saved potentially hours of development work and avoided shipping something that would have frustrated a portion of users from day one.
+
+{/* IMAGE SUGGESTION: Screenshot of the working prototype, or a before/after showing how the layout changed based on prototype feedback. If you have any photos or screen recordings from the testing sessions, those add authenticity. */}
+
+## What we shipped
+
+The final review page brought everything onto a single screen. The candidate's video played alongside their key information: languages, quota and performance data, industry experience, and years in sales. The full CV was one shortcut/click away, viewable without leaving the page. Keyboard shortcuts let recruiters move through their candidate queue quickly, accept or reject, and advance to the next applicant without lifting their hands from the keyboard. Mouse navigation was fully supported for those who preferred it.
+
+{/* IMAGE SUGGESTION: The main deliverable screenshot. Full review page as a recruiter would see it, showing the video, key data points, and CV access. This is the centrepiece. Make it large and clear. A device mockup (laptop) would add polish. */}
+
+The full project ran over roughly 10 weeks from initial sketches through to deployment, covering discovery, design iterations, prototype testing, engineering, and rollout.
+
+## The results
+
+After launch, the redesigned review page delivered a 20% reduction in time to review per candidate, measured by comparing average review duration before and after deployment. Feedback from customers was strongly positive, and several new customers specifically cited the review experience during their decision to sign up.
+
+{/* IMAGE SUGGESTION: A simple metric visualisation showing the 20% time reduction, or a quote/testimonial from a customer about the review experience. */}
+
+## What I learned
+
+This project reinforced how much value there is in putting working software in front of people early. The Figma mockups got us directionally right, but the prototype caught usability issues that static designs couldn't reveal. The keyboard versus mouse discovery alone justified the extra effort of building something functional before handing it to engineering.
+
+The rollout itself went smoothly because customers had been involved throughout. When we launched, the feature was already familiar to the people using it most. I sent video walkthroughs to the remaining customers and had onboarding calls to make sure everyone was comfortable.
+
+Looking back, this approach worked well for our scale at the time. If I were doing this for a larger customer base, I'd slow the rollout down. I'd start with a closed beta to validate at scale, then use a product-guided onboarding tool and written documentation for the wider launch. I'd also invest more time preparing internal teams beforehand. Sales, marketing, and customer support all need to understand what's changing, plan their own communications, and be ready for the questions customers will have. At Meritt's size, I could handle that through direct conversations. At scale, it needs to be a coordinated process.
