@@ -114,10 +114,10 @@ export default async function RootLayout({
             <Flex horizontal="center" fillWidth minHeight="0">
               <RouteGuard>{children}</RouteGuard>
             </Flex>
+            <SpeedInsights />
           </Flex>
           <Footer />
           <Analytics />
-          <SpeedInsights />
         </Column>
       </Providers>
     </Flex>
