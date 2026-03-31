@@ -109,11 +109,6 @@ export default async function Project({
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
         <CustomMDX source={post.content} enableHeadingLinks={false} />
       </Column>
-      <Column fillWidth gap="40" horizontal="center" marginTop="40">
-        <Line maxWidth="40" />
-        <SectionTitle marginBottom="24">Related projects</SectionTitle>
-        <Projects exclude={[post.slug]} range={[2]} />
-      </Column>
     </PageShell>
   );
 }
