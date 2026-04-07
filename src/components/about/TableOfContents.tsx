@@ -59,10 +59,10 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ structure, about, fix
       m={fixed ? { hide: true } : undefined}
       horizontal="start"
       align="start"
-      padding={fixed ? undefined : "l"}
-      radius={fixed ? undefined : "l"}
-      background={fixed ? undefined : "surface"}
-      border={fixed ? undefined : "neutral-alpha-weak"}
+      padding="l"
+      radius="l"
+      background={fixed ? "neutral-alpha-weak" : "surface"}
+      border="neutral-alpha-weak"
       overflow={fixed ? undefined : "hidden"}
     >
       {structure

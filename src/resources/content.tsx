@@ -166,11 +166,13 @@ const about: About = {
     institutions: [
       {
         name: "Hartpury University",
-        description: <>MSc. Strength & Conditioning (Graduated 2022).</>,
+        timeframe: "Graduated 2022",
+        description: <>MSc. Strength & Conditioning</>,
       },
       {
         name: "University of Plymouth",
-        description: <>BSc. Marketing (1st Class Hons) (Graduated 2019).</>,
+        timeframe: "Graduated 2019",
+        description: <>BSc. Marketing (1st Class Hons)</>,
       },
     ],
   },
@@ -181,19 +183,36 @@ const about: About = {
       {
         title: "Product Analytics & Experimentation",
         description: <>PostHog, funnel analysis, and structured A/B testing to improve activation and reduce drop-off.</>,
+        tags: [
+          { name: "PostHog", icon: "posthog" },
+          { name: "A/B Testing", icon: "googleanalytics" },
+        ],
       },
       {
         title: "AI & Data-First Product",
         description: <>Vector embeddings, semantic matching, and measurable AI outcomes (OpenAI + Pinecone), with cost-aware delivery.</>,
+        tags: [
+          { name: "OpenAI", icon: "openai" },
+          { name: "Pinecone", icon: "opensearch" },
+          { name: "AI Product", icon: "rocket" },
+        ],
       },
       {
         title: "UX, Prototyping & User Research",
         description: <>Figma-based rapid prototypes, user research, and iterative discovery cycles that de-risk build handoffs.</>,
-        tags: [{ name: "Figma", icon: "figma" }],
+        tags: [
+          { name: "Figma", icon: "figma" },
+          { name: "User Research", icon: "person" },
+          { name: "Discovery", icon: "globe" },
+          { name: "Prototyping", icon: "document" },
+        ],
       },
       {
         title: "Engineering Collaboration",
         description: <>REST API integrations, GraphQL, event tracking, and scoping work with engineers to ship reliably.</>,
+        tags: [
+          { name: "REST APIs", icon: "swagger" },
+        ],
       },
       {
         title: "Frontend Craft",

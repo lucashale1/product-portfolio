@@ -66,6 +66,38 @@ export default function About() {
         }}
       />
       <Row fillWidth s={{ direction: "column"}} horizontal="center">
+        {/* Mobile-only: name/role/social above the avatar */}
+        <Column hide s={{ hide: false }} fillWidth horizontal="center" paddingX="l" paddingBottom="m">
+          <PageHeroTitle className={styles.textAlign}>{person.name}</PageHeroTitle>
+          <PageHeroLead className={styles.textAlign}>{person.role}</PageHeroLead>
+          {social.length > 0 && (
+            <Row
+              className={styles.blockAlign}
+              paddingTop="20"
+              paddingBottom="8"
+              gap="8"
+              wrap
+              horizontal="center"
+              fitWidth
+              data-border="rounded"
+            >
+              {social
+                .filter((item) => item.essential)
+                .map(
+                  (item) =>
+                    item.link && (
+                      <IconButton
+                        key={item.name}
+                        size="l"
+                        href={item.link}
+                        icon={item.icon}
+                        variant="secondary"
+                      />
+                    ),
+                )}
+            </Row>
+          )}
+        </Column>
         {about.avatar.display && (
           <Column
             className={styles.avatar}
@@ -88,7 +120,9 @@ export default function About() {
             </Row>
 
             {about.tableOfContent.display && (
-              <TableOfContents structure={structure} about={about} fixed={false} />
+              <Column s={{ hide: true }}>
+                <TableOfContents structure={structure} about={about} fixed={false} />
+              </Column>
             )}
           </Column>
         )}
@@ -99,6 +133,7 @@ export default function About() {
             minHeight="160"
             vertical="center"
             marginBottom="32"
+            s={{ hide: true }}
           >
             <PageHeroTitle className={styles.textAlign}>{person.name}</PageHeroTitle>
             <PageHeroLead className={styles.textAlign}>{person.role}</PageHeroLead>
@@ -160,14 +195,16 @@ export default function About() {
               <Column fillWidth gap="l" marginBottom="40">
                 {about.work.experiences.map((experience, index) => (
                   <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
-                    <Row fillWidth horizontal="between" vertical="end" marginBottom="4">
-                    <Text variant="heading-strong-l">
-                      {experience.role}
-                    </Text>
-                      <Text variant="body-default-s" onBackground="neutral-weak">
-                        {experience.timeframe}
-                      </Text>
+                    {/* Desktop: role left, date right */}
+                    <Row fillWidth horizontal="between" vertical="end" marginBottom="4" s={{ hide: true }}>
+                      <Text variant="heading-strong-l">{experience.role}</Text>
+                      <Text variant="body-default-s" onBackground="neutral-weak">{experience.timeframe}</Text>
                     </Row>
+                    {/* Mobile: date above role */}
+                    <Column fillWidth marginBottom="4" hide s={{ hide: false }}>
+                      <Text variant="body-default-s" onBackground="neutral-weak">{experience.timeframe}</Text>
+                      <Text variant="heading-strong-l">{experience.role}</Text>
+                    </Column>
                     <Text id={experience.company} variant="heading-strong-s" onBackground="neutral-weak" marginBottom="m">
                         {experience.company}
                       </Text>
@@ -186,9 +223,9 @@ export default function About() {
                     </Column>
                     {experience.images && experience.images.length > 0 && (
                       <Row fillWidth paddingTop="m" paddingLeft="40" gap="12" wrap>
-                        {experience.images.map((image, index) => (
+                        {experience.images.map((image) => (
                           <Row
-                            key={index}
+                            key={image.src}
                             border="neutral-medium"
                             radius="m"
                             minWidth={image.width}
@@ -219,12 +256,21 @@ export default function About() {
               <Column fillWidth gap="l" marginBottom="40">
                 {about.studies.institutions.map((institution, index) => (
                   <Column key={`${institution.name}-${index}`} fillWidth gap="4">
-                    <Text id={institution.name} variant="heading-strong-s">
-                      {institution.name}
-                    </Text>
-                    <Text variant="body-default-m">
-                      {institution.description}
-                    </Text>
+                    {/* Desktop: name left, graduation date right */}
+                    <Row fillWidth horizontal="between" vertical="end" s={{ hide: true }}>
+                      <Text id={institution.name} variant="heading-strong-s">{institution.name}</Text>
+                      {institution.timeframe && (
+                        <Text variant="body-default-s" onBackground="neutral-weak">{institution.timeframe}</Text>
+                      )}
+                    </Row>
+                    {/* Mobile: date above name */}
+                    <Column fillWidth hide s={{ hide: false }}>
+                      {institution.timeframe && (
+                        <Text variant="body-default-s" onBackground="neutral-weak">{institution.timeframe}</Text>
+                      )}
+                      <Text id={institution.name} variant="heading-strong-s">{institution.name}</Text>
+                    </Column>
+                    <Text variant="body-default-m">{institution.description}</Text>
                   </Column>
                 ))}
               </Column>
@@ -237,8 +283,8 @@ export default function About() {
                 {about.technical.title}
               </SectionTitle>
               <Column fillWidth gap="l">
-                {about.technical.skills.map((skill, index) => (
-                  <Column key={`${skill}-${index}`} fillWidth gap="4">
+                {about.technical.skills.map((skill) => (
+                  <Column key={skill.title} fillWidth gap="4">
                     <Text id={skill.title} variant="heading-strong-s">
                       {skill.title}
                     </Text>
@@ -256,9 +302,9 @@ export default function About() {
                     )}
                     {skill.images && skill.images.length > 0 && (
                       <Row fillWidth paddingTop="m" gap="12" wrap>
-                        {skill.images.map((image, index) => (
+                        {skill.images.map((image) => (
                           <Row
-                            key={index}
+                            key={image.src}
                             border="neutral-medium"
                             radius="m"
                             minWidth={image.width}

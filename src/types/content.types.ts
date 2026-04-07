@@ -177,6 +177,8 @@ export interface About extends BasePageConfig {
     institutions: Array<{
       /** Institution name */
       name: string;
+      /** Graduation timeframe (e.g. "2022") */
+      timeframe?: string;
       /** Description of studies */
       description: React.ReactNode;
     }>;
