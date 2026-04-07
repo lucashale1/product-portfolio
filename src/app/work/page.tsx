@@ -1,4 +1,4 @@
-import { Column, Meta, Schema, Text } from "@once-ui-system/core";
+import { Column, Meta, Schema, Tag, Text } from "@once-ui-system/core";
 import { PageShell, PageHeroTitle, PageHeroLead } from "@/components";
 import { baseURL, about, person, work } from "@/resources";
 import { Projects } from "@/components/work/Projects";
@@ -34,6 +34,7 @@ export default function Work() {
         <PageHeroLead align="center">
           Strategy through delivery: AI + data-first decisions, rigorous discovery, and measurable outcomes across the full product lifecycle.
         </PageHeroLead>
+        <Tag size="l" style={{ marginTop: "var(--static-space-16)" }}>More coming soon!</Tag>
       </Column>
       <Projects />
     </PageShell>
